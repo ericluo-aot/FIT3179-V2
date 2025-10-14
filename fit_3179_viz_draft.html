@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIT3179 — Australian GP Winners Visualisation (Draft)</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+  <style>
+    body { font-family: Inter, Arial, sans-serif; margin: 20px; color:#111; }
+    .header { display:flex; align-items:center; gap:16px; margin-bottom:16px }
+    .title { font-size:22px; font-weight:700 }
+    .subtitle { color:#666; font-size:13px }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:18px }
+    .full { grid-column: 1 / -1 }
+    .panel { background:#fff; padding:12px; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,0.06) }
+    .chart-title { font-weight:600; margin-bottom:8px }
+    .driver-photo { width:72px; height:72px; object-fit:cover; border-radius:8px }
+    footer { margin-top:20px; color:#666; font-size:12px }
+    @media (max-width:900px){ .grid{ grid-template-columns: 1fr } }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="title">FIT3179 — Australian GP Winners (Draft)</div>
+      <div class="subtitle">Interactive draft: points progression, qualifying vs finishing efficiency, and global circuit map. (2018–2024)</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="panel full" id="panel-points">
+      <div class="chart-title">Points Progression — Winner vs Teammate (faceted by season)</div>
+      <div id="chart-points"></div>
+    </div>
+
+    <div class="panel" id="panel-gridfinish">
+      <div class="chart-title">Qualifying vs Finishing Efficiency — Winners (2018+)</div>
+      <div id="chart-gridfinish"></div>
+    </div>
+
+    <div class="panel" id="panel-map">
+      <div class="chart-title">Race Map — Country performance & circuits (2018–2024)</div>
+      <div id="chart-map"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    Data sources: Kaggle F1 dataset + processed CSVs in this repo. Author: Eric Luo. Date draft: 2025-10-14.
+  </footer>
+
+<script>
+// ---- Spec 1: Points progression (expects season_points_winners.csv in repo) ----
+const specPoints = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/season_points_winners.csv"},
+  "transform": [
+    {"filter": "datum.season >= 2018"},
+    {"calculate": "datum.role === 'Winner' ? datum.constructorName : datum.constructorName + '_teammate'", "as": "lineColorKey"}
+  ],
+  "facet": {"field": "season", "type": "ordinal", "sort": "ascending"},
+  "spec": {
+    "layer": [
+      {
+        "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
+        "encoding": {
+          "x": {"field": "round", "type": "quantitative", "axis": {"title":"Round"}},
+          "y": {"field": "cumulative_points", "type": "quantitative", "axis": {"title":"Cumulative Points"}},
+          "color": {
+            "field": "lineColorKey",
+            "type": "nominal",
+            "scale": {
+              "domain": ["Mercedes", "Mercedes_teammate","Red Bull", "Red Bull_teammate","Ferrari", "Ferrari_teammate","McLaren", "McLaren_teammate"],
+              "range": ["#00d2be", "#00d2be44","#1e41ff", "#1e41ff44","#dc0000", "#dc000044","#ff8700", "#ff870044"]
+            }
+          },
+          "detail": {"field": "driverName"},
+          "tooltip": [
+            {"field": "driverName", "type": "nominal"},
+            {"field": "constructorName", "type": "nominal"},
+            {"field": "raceName", "type": "nominal"},
+            {"field": "positionOrder", "type": "ordinal", "title": "Finishing Position"},
+            {"field": "driver_standings", "type": "ordinal", "title": "Driver Standings Position"},
+            {"field": "cumulative_points", "type": "quantitative", "title": "Cumulative Points"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "circle", "size": 60},
+        "encoding": {
+          "x": {"field": "round", "type": "quantitative"},
+          "y": {"field": "cumulative_points", "type": "quantitative"},
+          "color": {"field": "lineColorKey", "type": "nominal"},
+          "tooltip": [
+            {"field": "driverName", "type": "nominal"},
+            {"field": "constructorName", "type": "nominal"},
+            {"field": "raceName", "type": "nominal"},
+            {"field": "positionOrder", "type": "ordinal", "title": "Finishing Position"},
+            {"field": "driver_standings", "type": "ordinal", "title": "Driver Standings Position"},
+            {"field": "cumulative_points", "type": "quantitative", "title": "Cumulative Points"}
+          ]
+        }
+      }
+    ]
+  }
+};
+
+// ---- Spec 2: Qualifying vs Finish (image dots) ----
+const specGridFinish = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/season_points_winner_only.csv"},
+  "title": "Qualifying vs Finishing Efficiency (Aus GP Winners, 2018+)",
+  "transform": [
+    {"filter": "datum.season >= 2018"},
+    {"aggregate": [
+      {"op": "mean", "field": "grid", "as": "avgGrid"},
+      {"op": "mean", "field": "positionOrder", "as": "avgFinish"},
+      {"op": "sum", "field": "points", "as": "totalPoints"},
+      {"op": "count", "as": "raceCount"},
+      {"op": "sum", "field": "isWinner", "as": "wins"},
+      {"op": "sum", "field": "DNF", "as": "dnfs"},
+      {"op": "sum", "field": "isPole", "as": "poles"}
+    ], "groupby": ["season", "driverName", "driverImage"]}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "image", "width": 50, "height": 60},
+      "encoding": {
+        "x": {"field": "avgGrid", "type": "quantitative", "axis": {"title": "Average Grid Position (Qualifying)", "tickMinStep": 1}},
+        "y": {"field": "avgFinish", "type": "quantitative", "axis": {"title": "Average Finishing Position", "tickMinStep": 1}, "scale": {"reverse": true}},
+        "url": {"field": "driverImage"},
+        "tooltip": [
+          {"field": "driverName", "type": "nominal", "title": "Driver"},
+          {"field": "season", "type": "ordinal", "title": "Season"},
+          {"field": "avgGrid", "type": "quantitative", "format": ".2f", "title": "Avg Grid"},
+          {"field": "avgFinish", "type": "quantitative", "format": ".2f", "title": "Avg Finish"},
+          {"field": "wins", "type": "quantitative", "title": "Wins"},
+          {"field": "poles", "type": "quantitative", "title": "Poles"},
+          {"field": "dnfs", "type": "quantitative", "title": "DNFs"},
+          {"field": "totalPoints", "type": "quantitative", "title": "Total Points"},
+          {"field": "raceCount", "type": "quantitative", "title": "Races Counted"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "line", "strokeDash": [4, 4], "color": "black"},
+      "data": {"values": [{"grid": 0, "finish": 0}, {"grid": 7, "finish": 7}]},
+      "encoding": {"x": {"field": "grid", "type": "quantitative"}, "y": {"field": "finish", "type": "quantitative", "scale": {"reverse": true}}}
+    }
+  ],
+  "config": {"axis": {"grid": true}, "legend": {"orient": "bottom"}}
+};
+
+// ---- Spec 3: Map (countries shaded) ----
+const specMap = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": "Where Do Australian GP Winners Travel? (2018–2024)", "subtitle": "Countries shaded by average points scored across each season. Dots show race circuits sized by number of races.", "subtitleFont": "Inter, Arial, sans-serif", "fontSize": 18, "anchor": "start"},
+  "width": 900,
+  "height": 550,
+  "projection": {"type": "equalEarth"},
+  "layer": [
+    {
+      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json", "format": {"type": "topojson", "feature": "countries"}},
+      "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "white", "strokeWidth": 0.6}
+    },
+    {
+      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json", "format": {"type": "topojson", "feature": "countries"}},
+      "transform": [
+        {"calculate": "toNumber(datum.id)", "as": "countryID_num"},
+        {"lookup": "countryID_num", "from": {"data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_enhanced.csv"}, "key": "countryID", "fields": ["avgPoints","totalPoints","avgFinish","medianFinish","bestFinishDriver","worstFinishDriver","raceCount","rounds"]}}
+      ],
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+      "encoding": {
+        "color": {"condition": {"test": "datum.avgPoints != null", "field": "avgPoints", "type": "quantitative", "scale": {"domain": [0, 25], "range": ["#d62728", "#ffffb2", "#2ca02c"]}, "legend": {"title": "Average Points (Higher = Better)"}}, "value": "#e0e0e0"},
+        "tooltip": [
+          {"field": "properties.name", "title": "Country"},
+          {"field": "avgPoints", "title": "Avg Points", "format": ".2f"},
+          {"field": "totalPoints", "title": "Total Points"},
+          {"field": "avgFinish", "title": "Avg Finish", "format": ".2f"},
+          {"field": "medianFinish", "title": "Median Finish", "format": ".2f"},
+          {"field": "bestFinishDriver", "title": "Best Finish"},
+          {"field": "worstFinishDriver", "title": "Worst Finish"},
+          {"field": "raceCount", "title": "Races"},
+          {"field": "rounds", "title": "Rounds"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_enhanced.csv"},
+      "mark": {"type": "circle", "color": "#1f77b4", "opacity": 0.9, "stroke": "white", "strokeWidth": 0.6},
+      "encoding": {
+        "longitude": {"field": "lng", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "size": {"field": "raceCount", "type": "quantitative", "scale": {"range": [40, 250]}, "legend": {"title": "No. of Races"}},
+        "tooltip": [
+          {"field": "circuitName", "title": "Circuit"},
+          {"field": "country", "title": "Country"},
+          {"field": "raceCount", "title": "No. of Races"},
+          {"field": "avgPoints", "title": "Avg Points", "format": ".2f"},
+          {"field": "avgFinish", "title": "Avg Finish", "format": ".2f"},
+          {"field": "bestFinishDriver", "title": "Best Finish"},
+          {"field": "worstFinishDriver", "title": "Worst Finish"},
+          {"field": "rounds", "title": "Rounds"}
+        ]
+      }
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}, "legend": {"labelFont": "Inter, Arial, sans-serif", "titleFont": "Inter, Arial, sans-serif"}, "title": {"font": "Inter, Arial, sans-serif"}}
+};
+
+// Render embeds
+vegaEmbed('#chart-points', specPoints, {actions:false}).catch(console.error);
+vegaEmbed('#chart-gridfinish', specGridFinish, {actions:false}).catch(console.error);
+vegaEmbed('#chart-map', specMap, {actions:false}).catch(console.error);
+</script>
+</body>
+</html>
