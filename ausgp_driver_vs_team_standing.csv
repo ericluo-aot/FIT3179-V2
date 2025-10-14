@@ -1,0 +1,6 @@
+season,driverName,constructorName,driverStanding,constructorStanding,driver_points,Champion,constructor_points,Constructors_champion
+2018,Sebastian Vettel,Ferrari,2,2,320,"Lewis Hamilton, 408 points",571,"Mercedes, 655 points"
+2019,Valtteri Bottas,Mercedes,2,1,326,"Lewis Hamilton, 413 points",739,"Mercedes, 739 points"
+2022,Charles Leclerc,Ferrari,2,2,308,"Max Verstappen, 454 points",554,"Red Bull, 759 points"
+2023,Max Verstappen,Red Bull,1,1,575,"Max Verstappen, 575 points",860,"Red Bull, 860 points"
+2024,Carlos Sainz,Ferrari,5,2,290,"Max Verstappen, 437 points",652,"McLaren, 666 points"
