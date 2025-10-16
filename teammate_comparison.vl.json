@@ -22,7 +22,7 @@
     "header": {"title": null, "labelFontSize": 12, "labelPadding": 8}
   },
   "spec": {
-    "width": 240,
+    "width": 180,
     "height": 180,
     "layer": [
       {
@@ -37,14 +37,12 @@
               "domain": [
                 "Mercedes", "Mercedes_teammate",
                 "Red Bull", "Red Bull_teammate",
-                "Ferrari", "Ferrari_teammate",
-                "McLaren", "McLaren_teammate"
+                "Ferrari", "Ferrari_teammate"
               ],
               "range": [
                 "#00d2be", "#00d2be40",
                 "#1e41ff", "#1e41ff40",
-                "#dc0000", "#dc000040",
-                "#ff8700", "#ff870040"
+                "#dc0000", "#dc000040"
               ]
             }
           },
