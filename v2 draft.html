@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Australian GP Winners Visualisation</title>
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css">
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .chart {
+    margin-bottom: 50px;
+  }
+  .vl-chart {
+    width: 100%;
+    max-width: 960px;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Australian GP Winners Visualisation (2018–2024)</h1>
+
+<div class="chart" id="chart1">
+  <h2>Winners vs Teammate Performance Across the Season</h2>
+</div>
+
+<div class="chart" id="chart2">
+  <h2>Qualifying vs Finishing Efficiency (Aus GP Winners)</h2>
+</div>
+
+<div class="chart" id="chart3">
+  <h2>Where Do Australian GP Winners Travel?</h2>
+</div>
+
+<div class="chart" id="chart4">
+  <h2>Winners vs Constructor Performance (2018–2024)</h2>
+</div>
+
+<script>
+const charts = [
+  {id: "chart1", spec: 
+    // Paste your first JSON spec here
+    `{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title": {"text": "Australian GP Winners vs Teammate Performance Across the Season", "anchor": "start", "fontSize": 16},
+      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winners.csv"},
+      "transform": [{"filter": "datum.season >= 2018"},{"calculate": "datum.role === 'Winner' ? datum.constructorName : datum.constructorName + '_teammate'", "as": "lineColorKey"}],
+      "facet": {"field": "facetTitle","type": "ordinal","sort": "ascending","header": {"title": null}},
+      "spec": {"width": 320,"height": 200,"layer":[{"mark": {"type": "line","strokeWidth": 3,"interpolate": "monotone"},"encoding": {"x": {"field": "round","type": "quantitative","title": "Round"},"y": {"field": "cumulative_points","type": "quantitative","title": "Cumulative Points"},"color": {"field": "lineColorKey","type": "nominal","scale": {"domain":["Mercedes","Mercedes_teammate","Red Bull","Red Bull_teammate","Ferrari","Ferrari_teammate","McLaren","McLaren_teammate"],"range":["#00d2be","#00d2be44","#1e41ff","#1e41ff44","#dc0000","#dc000044","#ff8700","#ff870044"]}},"detail": {"field": "driverName"},"tooltip":[{"field": "driverName","type": "nominal"},{"field": "constructorName","type": "nominal"},{"field": "raceName","type": "nominal"},{"field": "positionOrder","type": "ordinal","title": "Finishing Position"},{"field": "driver_standings","type": "ordinal","title": "Driver Standings Position"},{"field": "cumulative_points","type": "quantitative","title": "Cumulative Points"}]}} , {"mark": {"type": "circle","size": 60},"encoding":{"x": {"field": "round","type": "quantitative"},"y": {"field": "cumulative_points","type": "quantitative"},"color": {"field": "lineColorKey","type": "nominal"},"tooltip":[{"field": "driverName","type": "nominal"},{"field": "constructorName","type": "nominal"},{"field": "raceName","type": "nominal"},{"field": "positionOrder","type": "ordinal","title": "Finishing Position"},{"field": "driver_standings","type": "ordinal","title": "Driver Standings Position"},{"field": "cumulative_points","type": "quantitative","title": "Cumulative Points"}]}}]},"resolve": {"scale": {"y": "shared","x": "shared"}},"config":{"facet":{"spacing": 20},"legend":{"disable": true}}}`
+  },
+  {id: "chart2", spec:
+    `{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winner_only.csv"},
+      "title": "Qualifying vs Finishing Efficiency (Aus GP Winners, 2018+)",
+      "transform": [{"filter": "datum.season >= 2018"},{"aggregate": [{"op": "mean","field": "grid","as": "avgGrid"},{"op": "mean","field": "positionOrder","as": "avgFinish"},{"op": "sum","field": "points","as": "totalPoints"},{"op": "count","as": "raceCount"},{"op": "sum","field": "isWinner","as": "wins"},{"op": "sum","field": "DNF","as": "dnfs"},{"op": "sum","field": "isPole","as": "poles"}],"groupby": ["season","driverName","driverImage"]}],
+      "layer":[{"mark": {"type": "image","width":50,"height":60},"encoding":{"x":{"field":"avgGrid","type":"quantitative","axis":{"title":"Average Grid Position (Qualifying)","tickMinStep":1}},"y":{"field":"avgFinish","type":"quantitative","axis":{"title":"Average Finishing Position","tickMinStep":1},"scale":{"reverse":true}},"url":{"field":"driverImage"},"tooltip":[{"field":"driverName","type":"nominal","title":"Driver"},{"field":"season","type":"ordinal","title":"Season"},{"field":"avgGrid","type":"quantitative","format":".2f","title":"Avg Grid"},{"field":"avgFinish","type":"quantitative","format":".2f","title":"Avg Finish"},{"field":"wins","type":"quantitative","title":"Wins"},{"field":"poles","type":"quantitative","title":"Poles"},{"field":"dnfs","type":"quantitative","title":"DNFs"},{"field":"totalPoints","type":"quantitative","title":"Total Points"},{"field":"raceCount","type":"quantitative","title":"Races Counted"}]}} , {"mark": {"type":"line","strokeDash":[4,4],"color":"black"},"data":{"values":[{"grid":0,"finish":0},{"grid":7,"finish":7}]},"encoding":{"x":{"field":"grid","type":"quantitative"},"y":{"field":"finish","type":"quantitative","scale":{"reverse":true}}}}],"config":{"axis":{"grid":true},"legend":{"orient":"bottom"}}}`
+  },
+  {id: "chart3", spec:
+    `{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title": {"text":"Where Do Australian GP Winners Travel? (2018–2024)","subtitle":"Countries shaded by average points scored across each season. Dots show race circuits sized by number of races.","subtitleFont":"Inter, Arial, sans-serif","fontSize":18,"anchor":"start"},
+      "width":900,"height":550,"projection":{"type":"equalEarth"},
+      "layer":[{"data":{"url":"https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json","format":{"type":"topojson","feature":"countries"}},"mark":{"type":"geoshape","fill":"#e0e0e0","stroke":"white","strokeWidth":0.6}},{"data":{"url":"https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json","format":{"type":"topojson","feature":"countries"}},"transform":[{"calculate":"toNumber(datum.id)","as":"countryID_num"},{"lookup":"countryID_num","from":{"data":{"url":"https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_enhanced.csv"},"key":"countryID","fields":["avgPoints","totalPoints","avgFinish","medianFinish","bestFinishDriver","worstFinishDriver","raceCount","rounds"]}}],"mark":{"type":"geoshape","stroke":"white","strokeWidth":0.5},"encoding":{"color":{"condition":{"test":"datum.avgPoints != null","field":"avgPoints","type":"quantitative","scale":{"domain":[0,25],"range":["#d62728","#ffffb2","#2ca02c"]},"legend":{"title":"Average Points (Higher = Better)"}},"value":"#e0e0e0"},"tooltip":[{"field":"properties.name","title":"Country"},{"field":"avgPoints","title":"Avg Points","format":".2f"},{"field":"totalPoints","title":"Total Points"},{"field":"avgFinish","title":"Avg Finish","format":".2f"},{"field":"medianFinish","title":"Median Finish","format":".2f"},{"field":"bestFinishDriver","title":"Best Finish"},{"field":"worstFinishDriver","title":"Worst Finish"},{"field":"raceCount","title":"Races"},{"field":"rounds","title":"Rounds"}]}},{"data":{"url":"https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_enhanced.csv"},"mark":{"type":"circle","color":"#1f77b4","opacity":0.9,"stroke":"white","strokeWidth":0.6},"encoding":{"longitude":{"field":"lng","type":"quantitative"},"latitude":{"field":"lat","type":"quantitative"},"size":{"field":"raceCount","type":"quantitative","scale":{"range":[40,250]},"legend":{"title":"No. of Races"}},"tooltip":[{"field":"circuitName","title":"Circuit"},{"field":"country","title":"Country"},{"field":"raceCount","title":"No. of Races"},{"field":"avgPoints","title":"Avg Points","format":".2f"},{"field":"avgFinish","title":"Avg Finish","format":".2f"},{"field":"bestFinishDriver","title":"Best Finish"},{"field":"worstFinishDriver","title":"Worst Finish"},{"field":"rounds","title":"Rounds"}]}}],
+      "config":{"view":{"stroke":"transparent"},"legend":{"labelFont":"Inter, Arial, sans-serif","titleFont":"Inter, Arial, sans-serif"},"title":{"font":"Inter, Arial, sans-serif"}}
+    }`
+  },
+  {id: "chart4", spec:
+    `{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title":{"text":"Australian GP Winners vs Constructor Performance (2018–2024)","subtitle":"Comparing Australian GP–winning drivers’ and constructors’ final championship standings","anchor":"start","fontSize":16},
+      "data":{"url":"https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/ausgp_driver_vs_team_standing.csv"},
+      "transform":[{"fold":["driverStanding","constructorStanding"],"as":["Type","Standing"]},{"calculate":"datum.Type == 'driverStanding' ? 'Driver' : 'Constructor'","as":"Category"},{"calculate":"datum.Category === 'Driver' ? datum.constructorName : datum.constructorName + ' (Constructor)'","as":"ColorKey"},{"calculate":"6 - datum.Standing","as":"Height"},{"calculate":"datum.season + ' - ' + datum.driverName","as":"SeasonLabel"}],
+      "mark":{"type":"bar","cornerRadiusTopLeft":3,"cornerRadiusTopRight":3},
+      "encoding":{"x":{"field":"SeasonLabel","type":"ordinal","title":"Season – Driver","axis":{"labelAngle":-40,"labelFontSize":11}},"y":{"field":"Height","type":"quantitative","title":"Championship Standing (1 = Best)","scale":{"domain":[0,6]},"axis":{"values":[1,2,3,4,5,6,7,8,9,10],"labelExpr":"6 - datum.value"}},"xOffset":{"field":"Category","sort":["Driver","Constructor"]},"color":{"field":"ColorKey","type":"nominal","scale":{"domain":["Ferrari","Mercedes","Red Bull","Ferrari (Constructor)","Mercedes (Constructor)","Red Bull (Constructor)"],"range":["#DC0000","#00D2BE","#1E41FF","#A30000","#009E8E","#162FBA"]},"legend":{"title":"Constructor"}},"tooltip":[{"field":"season","title":"Season"},{"field":"Category","title":"Type"},{"field":"driverName","title":"Driver"},{"field":"constructorName","title":"Constructor"},{"field":"Standing","title":"Final Standing"},{"field":"driver_points","title":"Driver Points"},{"field":"constructor_points","title":"Constructor Points"},{"field":"Champion","title":"Drivers' Champion"},{"field":"Constructors_champion","title":"Constructors' Champion"}]},
+      "config":{"view":{"stroke":"transparent"},"axis":{"labelFontSize":12,"titleFontSize":13},"legend":{"orient":"top"}}
+    }`
+  }
+];
+
+charts.forEach(c => {
+  vegaEmbed(`#${c.id}`, c.spec, {actions:false, renderer:"canvas"});
+});
+</script>
+
+</body>
+</html>
