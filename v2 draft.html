@@ -1,195 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Australian GP Winners — Visual Analysis</title>
+  <title>Formula 1 Performance Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
   <style>
     body {
-      font-family: "Inter", Arial, sans-serif;
-      margin: 30px auto;
-      max-width: 1200px;
-      padding: 0 20px;
-      background: #fafafa;
-      color: #222;
+      background: #e8ecf2;
+      font-family: Calibri, sans-serif;
     }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      padding: 40px 60px;
+    }
+
     h1 {
-      font-size: 26px;
-      margin-bottom: 5px;
+      text-align: center;
+      font-size: 2.4rem;
+      margin-top: 0;
+      color: #c00000; /* Ferrari red accent */
     }
+
     h2 {
-      font-size: 20px;
-      margin-top: 40px;
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      margin-top: 2rem;
+      padding-left: 10px;
+      border-left: 4px solid #c00000;
     }
-    .chart {
-      margin: 30px 0;
+
+    p {
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    section {
+      background: #fff;
       border-radius: 10px;
-      background: white;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .chart {
+      margin-top: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 30px 25px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1>Formula 1 Performance Dashboard</h1>
 
-  <h1>Australian GP Winners — Data Visualisation Suite (2018–2024)</h1>
-  <p>This page explores how Australian Grand Prix winners performed across the season, comparing qualifying efficiency, team relationships, and geographic race outcomes.</p>
+    <section>
+      <h2>Overview</h2>
+      <p>This dashboard visualises how Australian Grand Prix winners have performed across the season relative to their teammates and constructors. It provides context on driver dominance, team competitiveness, and performance consistency over recent seasons.</p>
+    </section>
 
-  <div class="chart" id="chart1"></div>
-  <div class="chart" id="chart2"></div>
-  <div class="chart" id="chart3"></div>
-  <div class="chart" id="chart4"></div>
+    <section>
+      <h2>Driver vs Constructor Performance (2018–2024)</h2>
+      <div id="driverConstructorChart" class="chart"></div>
+      <p><em>Shows the final championship standings of Australian GP–winning drivers versus their constructors.</em></p>
+    </section>
 
-  <script type="text/javascript">
-    // Chart 1: Winner vs Teammate Progression
-    const chart1 = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "title": {
-        "text": "Australian GP Winners vs Teammate Performance Across the Season",
-        "anchor": "start",
-        "fontSize": 16
-      },
-      "data": {
-        "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winners.csv"
-      },
-      "transform": [
-        {"filter": "datum.season >= 2018"},
-        {
-          "calculate": "datum.role === 'Winner' ? datum.constructorName : datum.constructorName + '_teammate'",
-          "as": "lineColorKey"
-        }
-      ],
-      "facet": {
-        "field": "facetTitle",
-        "type": "ordinal",
-        "sort": "ascending",
-        "header": {"title": null}
-      },
-      "spec": {
-        "width": 320,
-        "height": 200,
-        "layer": [
-          {
-            "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
-            "encoding": {
-              "x": {"field": "round", "type": "quantitative", "title": "Round"},
-              "y": {"field": "cumulative_points", "type": "quantitative", "title": "Cumulative Points"},
-              "color": {
-                "field": "lineColorKey",
-                "type": "nominal",
-                "scale": {
-                  "domain": [
-                    "Mercedes", "Mercedes_teammate",
-                    "Red Bull", "Red Bull_teammate",
-                    "Ferrari", "Ferrari_teammate",
-                    "McLaren", "McLaren_teammate"
-                  ],
-                  "range": [
-                    "#00d2be", "#00d2be44",
-                    "#1e41ff", "#1e41ff44",
-                    "#dc0000", "#dc000044",
-                    "#ff8700", "#ff870044"
-                  ]
-                }
-              },
-              "tooltip": [
-                {"field": "driverName"},
-                {"field": "constructorName"},
-                {"field": "raceName"},
-                {"field": "cumulative_points", "title": "Cumulative Points"}
-              ]
-            }
-          },
-          {
-            "mark": {"type": "circle", "size": 60},
-            "encoding": {
-              "x": {"field": "round", "type": "quantitative"},
-              "y": {"field": "cumulative_points", "type": "quantitative"},
-              "color": {"field": "lineColorKey", "type": "nominal"}
-            }
-          }
-        ]
-      },
-      "resolve": {"scale": {"y": "shared", "x": "shared"}},
-      "config": {"facet": {"spacing": 20}, "legend": {"disable": true}}
-    };
+    <section>
+      <h2>Performance Against Teammates</h2>
+      <div class="two-col">
+        <div>
+          <div id="teammatePerformance" class="chart"></div>
+        </div>
+        <div>
+          <p>This visual compares how each Australian GP winner performed against their teammate across the same season, offering insight into intra-team performance gaps and consistency.</p>
+        </div>
+      </div>
+    </section>
 
-    // Chart 2: Qualifying vs Finishing
-    const chart2 = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "data": {"url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winner_only.csv"},
-      "title": "Qualifying vs Finishing Efficiency (Aus GP Winners, 2018+)",
-      "transform": [
-        {"filter": "datum.season >= 2018"},
-        {
-          "aggregate": [
-            {"op": "mean", "field": "grid", "as": "avgGrid"},
-            {"op": "mean", "field": "positionOrder", "as": "avgFinish"},
-            {"op": "sum", "field": "points", "as": "totalPoints"}
-          ],
-          "groupby": ["season", "driverName", "driverImage"]
-        }
-      ],
-      "layer": [
-        {
-          "mark": {"type": "image", "width": 50, "height": 60},
-          "encoding": {
-            "x": {"field": "avgGrid", "type": "quantitative", "axis": {"title": "Avg Grid"}},
-            "y": {"field": "avgFinish", "type": "quantitative", "scale": {"reverse": true}, "axis": {"title": "Avg Finish"}},
-            "url": {"field": "driverImage"}
-          }
-        }
-      ]
-    };
+    <section>
+      <h2>Australian GP Impact on Season Outcome</h2>
+      <p>The chart below highlights how each Australian GP result related to the driver's season-long performance trajectory — whether an early indicator of dominance or an outlier event.</p>
+      <div id="ausGPTrend" class="chart"></div>
+    </section>
+  </div>
 
-    // Chart 3: Map
-    const chart3 = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "title": {
-        "text": "Where Do Australian GP Winners Travel? (2018–2024)",
-        "subtitle": "Countries shaded by average points scored. Dots show race circuits sized by number of races.",
-        "anchor": "start"
-      },
-      "width": 900,
-      "height": 550,
-      "projection": {"type": "equalEarth"},
-      "layer": [
-        {
-          "data": {
-            "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json",
-            "format": {"type": "topojson", "feature": "countries"}
-          },
-          "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "white", "strokeWidth": 0.6}
-        }
-      ]
-    };
-
-    // Chart 4: Driver vs Constructor Standing
-    const chart4 = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "title": {
-        "text": "Australian GP Winners vs Constructor Performance (2018–2024)",
-        "subtitle": "Comparing winners’ and constructors’ championship standings"
-      },
-      "data": {
-        "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/ausgp_driver_vs_team_standing.csv"
-      },
-      "mark": "bar",
-      "encoding": {
-        "x": {"field": "season", "type": "ordinal", "title": "Season"},
-        "y": {"field": "driverStanding", "type": "quantitative", "title": "Standing"},
-        "color": {"field": "constructorName", "type": "nominal"}
-      }
-    };
-
-    vegaEmbed('#chart1', chart1, {actions: false});
-    vegaEmbed('#chart2', chart2, {actions: false});
-    vegaEmbed('#chart3', chart3, {actions: false});
-    vegaEmbed('#chart4', chart4, {actions: false});
+  <script>
+    vegaEmbed("#driverConstructorChart", "charts/driver_constructor.vl.json", {actions: false});
+    vegaEmbed("#teammatePerformance", "charts/teammate_comparison.vl.json", {actions: false});
+    vegaEmbed("#ausGPTrend", "charts/ausgp_trend.vl.json", {actions: false});
   </script>
-
 </body>
 </html>
