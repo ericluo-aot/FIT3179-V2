@@ -22,7 +22,7 @@
     "header": {"title": null, "labelFontSize": 12, "labelPadding": 8}
   },
   "spec": {
-    "width": 180,
+    "width": 100,
     "height": 180,
     "layer": [
       {
