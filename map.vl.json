@@ -1,0 +1,224 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Interactive world map showing where Australian Grand Prix winners scored points at other circuits. Select overall (2018–2024) or a specific season; re-center by region; show/hide circuits.",
+    "title": {
+      "text": { "expr": "ShowAll ? 'How do Australian GP winners perform across the season? (Overall 2018–2024)' : 'How do Australian GP winners perform across the season? (' + Year + ')'" },
+      "subtitle": "Countries shaded by country average points for the selected season. Dots show circuits sized by number of races.",
+      "subtitleFont": "Inter, Arial, sans-serif",
+      "fontSize": 18,
+      "anchor": "start"
+    },
+    "autosize": { "type": "fit", "contains": "padding" },
+    "width": 900,
+    "height": 550,
+  
+    "params": [
+      {
+        "name": "ShowAll",
+        "value": true,
+        "bind": { "input": "checkbox", "name": "show overall (2018–2024) " }
+      },
+      {
+        "name": "Year",
+        "value": 2024,
+        "bind": { "input": "range", "min": 2018, "max": 2024, "step": 1, "name": "year " }
+      },
+      {
+        "name": "Region",
+        "value": "World",
+        "bind": {
+          "input": "select",
+          "name": "region ",
+          "options": ["World", "Europe", "Americas", "Asia", "Oceania", "Middle East"]
+        }
+      },
+      {
+        "name": "ShowDots",
+        "value": true,
+        "bind": { "input": "checkbox", "name": "show circuits " }
+      }
+    ],
+  
+    "projection": {
+      "type": "equalEarth",
+      "center": {
+        "expr": "Region=='Europe' ? [10,50] : Region=='Americas' ? [-80,15] : Region=='Asia' ? [105,15] : Region=='Oceania' ? [140,-20] : Region=='Middle East' ? [45,25] : [0,20]"
+      },
+      "scale": {
+        "expr": "Region=='Europe' ? 850 : Region=='Americas' ? 250 : Region=='Asia' ? 400 : Region=='Oceania' ? 400 : Region=='Middle East' ? 800 : 180"
+      }
+    },
+  
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json",
+          "format": { "type": "topojson", "feature": "countries" }
+        },
+        "mark": { "type": "geoshape", "fill": "#f2f2f2", "stroke": "#ffffff", "strokeWidth": 0.6, "strokeJoin": "round", "strokeMiterLimit": 2 }
+      },
+  
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_timesliced.csv",
+          "format": { "type": "csv" }
+        },
+        "transform": [
+          { "calculate": "toString(datum.season)", "as": "season_str" },
+          { "calculate": "lower(trim(datum.season_str))", "as": "season_lc" },
+          { "calculate": "indexof(datum.season_lc,'all')==0", "as": "is_overall" },
+          { "calculate": "toNumber(datum.season_str)", "as": "season_num" },
+          { "filter": "ShowAll ? datum.is_overall : datum.season_num == Year" },
+          { "calculate": "trim(toString(datum.countryID))", "as": "cid_str" },
+          { "calculate": "toNumber(datum.countryavgPoints)", "as": "cap_num" },
+          { "calculate": "toNumber(datum.totalPoints)", "as": "tp_num" },
+          { "calculate": "toNumber(datum.avgFinish)", "as": "af_num" },
+          { "calculate": "toNumber(datum.medianFinish)", "as": "mf_num" },
+          { "calculate": "toNumber(datum.raceCount)", "as": "rc_num" },
+          {
+            "aggregate": [
+              { "op": "mean", "field": "cap_num", "as": "countryavgPoints" },
+              { "op": "sum", "field": "tp_num", "as": "totalPoints" },
+              { "op": "mean", "field": "af_num", "as": "avgFinish" },
+              { "op": "mean", "field": "mf_num", "as": "medianFinish" },
+              { "op": "sum", "field": "rc_num", "as": "raceCount" }
+            ],
+            "groupby": ["cid_str", "country"]
+          },
+          {
+            "lookup": "cid_str",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/countries-50m.json",
+                "format": { "type": "topojson", "feature": "countries" }
+              },
+              "key": "id",
+              "fields": ["geometry"]
+            },
+            "as": "geo"
+          },
+          { "filter": "datum.geo != null" }
+        ],
+        "mark": { "type": "geoshape", "stroke": "white", "strokeWidth": 0.5 },
+        "encoding": {
+          "shape": { "field": "geo", "type": "geojson" },
+          "color": {
+            "field": "countryavgPoints",
+            "type": "quantitative",
+            "scale": {
+    "domain": [0, 25],
+    "range": ["#e0f3f8", "#abd9e9", "#74add1", "#4575b4", "#313695"]
+  }
+  ,
+            "legend": { "title": "avg points by country", "orient": "bottom" }
+          },
+          "tooltip": [
+            { "field": "country", "title": "country" },
+            { "field": "countryavgPoints", "title": "avg points", "format": ".2f" },
+            { "field": "totalPoints", "title": "total points", "format": ".0f" },
+            { "field": "raceCount", "title": "races", "format": ".0f" }
+          ]
+        }
+      },
+  
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/main/ausgp_winners_mapdata_timesliced.csv",
+          "format": { "type": "csv" }
+        },
+        "transform": [
+          { "filter": "ShowDots" },
+          { "calculate": "toString(datum.season)", "as": "season_str" },
+          { "calculate": "lower(trim(datum.season_str))", "as": "season_lc" },
+          { "calculate": "indexof(datum.season_lc,'all')==0", "as": "is_overall" },
+          { "calculate": "toNumber(datum.season_str)", "as": "season_num" },
+          { "filter": "ShowAll ? datum.is_overall : datum.season_num == Year" },
+          { "calculate": "toNumber(datum.lat)", "as": "lat_num" },
+          { "calculate": "toNumber(datum.lng)", "as": "lng_num" },
+          { "calculate": "toNumber(datum.raceCount)", "as": "raceCount_num" },
+          { "calculate": "toNumber(datum.avgPoints)", "as": "avgPoints_num" },
+          { "calculate": "toNumber(datum.avgFinish)", "as": "avgFinish_num" },
+          { "filter": "isFinite(datum.lat_num) && isFinite(datum.lng_num)" },
+          { "filter": "isFinite(datum.raceCount_num) && datum.raceCount_num > 0" }
+        ],
+        "mark": { "type": "circle", "color": "#1f77b4", "opacity": 0.9, "stroke": "white", "strokeWidth": 0.6 },
+        "encoding": {
+          "longitude": { "field": "lng_num", "type": "quantitative" },
+          "latitude": { "field": "lat_num", "type": "quantitative" },
+          "size": {
+            "field": "raceCount_num",
+            "type": "quantitative",
+            "scale": { "domain": [1, 10], "range": [45, 250] },
+            "legend": { "title": "No. of Races" }
+          },
+          "tooltip": [
+            { "field": "circuitName", "title": "circuit" },
+            { "field": "country", "title": "country" },
+            { "field": "season_str", "title": "season" },
+            { "field": "raceCount_num", "title": "no. of races" },
+            { "field": "avgPoints_num", "title": "avg points (circuit)", "format": ".2f" },
+            { "field": "avgFinish_num", "title": "avg finish", "format": ".2f" },
+            { "field": "bestFinishDriver", "title": "best finish" },
+            { "field": "worstFinishDriver", "title": "worst finish" },
+            { "field": "rounds", "title": "rounds" }
+          ]
+        }
+      },
+  
+      {
+        "data": { "values": [{}] },
+        "transform": [ { "filter": "!ShowAll && (Year==2020 || Year==2021)" } ],
+        "mark": {
+          "type": "text",
+          "align": "center",
+          "baseline": "middle",
+          "font": "Inter, Arial, sans-serif",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "fill": "#444"
+        },
+        "encoding": {
+          "text": { "value": "No race data for the selected year (2020/2021)" },
+          "x": { "value": 450 },
+          "y": { "value": 520 }
+        }
+      },
+  
+      {
+        "data": { "values": [{}] },
+        "transform": [ { "filter": "ShowAll" } ],
+        "mark": { "type": "text", "align": "left", "baseline": "middle", "font": "Inter, Arial, sans-serif", "fontSize": 12, "fill": "#666" },
+        "encoding": {
+          "text": { "value": "overall selected — year slider inactive" },
+          "x": { "value": 10 },
+          "y": { "value": 545 }
+        }
+      },
+  
+      {
+        "data": { "values": [{}] },
+        "mark": { "type": "text", "align": "left", "baseline": "top", "font": "Inter, Arial, sans-serif", "fontSize": 12, "fontWeight": "bold", "fill": "#333" },
+        "encoding": {
+          "text": { "expr": "ShowAll ? 'view: overall (2018–2024)' : 'view: ' + Year" },
+          "x": { "value": 10 },
+          "y": { "value": 10 }
+        }
+      }
+    ],
+  
+    "config": {
+      "view": { "stroke": "transparent" },
+      "legend": {
+        "labelFont": "Inter, Arial, sans-serif",
+        "titleFont": "Inter, Arial, sans-serif",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      },
+      "axis": {
+        "labelFont": "Inter, Arial, sans-serif",
+        "titleFont": "Inter, Arial, sans-serif"
+      },
+      "title": { "font": "Inter, Arial, sans-serif" }
+    }
+  }
+  
