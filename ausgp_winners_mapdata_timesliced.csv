@@ -1,0 +1,137 @@
+season,circuitName,country,location,lat,lng,avgPoints,totalPoints,avgFinish,medianFinish,bestFinishDriver,worstFinishDriver,raceCount,rounds,countryID,countryavgPoints
+All (2018Ð2024),Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,25.4,127,1,1,"1, (2018 Sebastian Vettel, 2019 Valtteri Bottas, 2022 Charles Leclerc, 2023 Max Verstappen, 2024 Carlos Sainz)","1, (2018 Sebastian Vettel, 2019 Valtteri Bottas, 2022 Charles Leclerc, 2023 Max Verstappen, 2024 Carlos Sainz)",5,"Round 1 - 2018-2019, Round 3 - 2022-2024",36,25.4
+All (2018Ð2024),Autodromo Enzo e Dino Ferrari,Italy,Imola,44.3439,11.7167,9,18,5.5,5.5,"5, (2024 Carlos Sainz)","6, (2022 Charles Leclerc)",2,"Round 4 - 2022, Round 7 - 2024",380,14.33333333
+All (2018Ð2024),Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,17,85,2.6,2,"1, (2023 Max Verstappen)","4, (2018 Sebastian Vettel, 2024 Carlos Sainz)",5,"Round 14 - 2018-2019, 2023, Round 16 - 2022, 2024",380,14.33333333
+All (2018Ð2024),Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,18.2,91,2.6,2,"1, (2023 Max Verstappen, 2024 Carlos Sainz)","6, (2022 Charles Leclerc)",5,"Round 18 - 2019, Round 19 - 2018, 2023, Round 20 - 2022, 2024",484,18.2
+All (2018Ð2024),Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,9,45,9.4,6,"1, (2023 Max Verstappen)","20, (2019 Valtteri Bottas)",5,"Round 20 - 2018-2019, 2023, Round 21 - 2022, 2024",76,9
+All (2018Ð2024),Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,21.8,109,1.6,1,"1, (2018 Sebastian Vettel, 2022 Charles Leclerc, 2023 Max Verstappen)","3, (2024 Carlos Sainz)",5,"Round 1 - 2022-2024, Round 2 - 2018-2019",48,21.8
+All (2018Ð2024),Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,11,55,8.8,4,"1, (2019 Valtteri Bottas)","19, (2022 Charles Leclerc)",5,"Round 4 - 2018-2019, 2023, Round 8 - 2022, Round 17 - 2024",31,11
+All (2018Ð2024),Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,14.6,73,5.4,4,"1, (2018 Sebastian Vettel, 2023 Max Verstappen)","16, (2024 Carlos Sainz)",5,"Round 7 - 2018-2019, Round 8 - 2023, Round 9 - 2022, 2024",124,14.6
+All (2018Ð2024),Circuit Park Zandvoort,Netherlands,Zandvoort,52.3888,4.54092,16.666666666666668,50,3,3,"1, (2023 Max Verstappen)","5, (2024 Carlos Sainz)",3,"Round 13 - 2023, Round 15 - 2022, 2024",528,16.66666667
+All (2018Ð2024),Circuit Paul Ricard,France,Le Castellet,43.2506,5.79167,9.333333333333334,28,8.666666666666666,5,"2, (2019 Valtteri Bottas)","19, (2022 Charles Leclerc)",3,"Round 8 - 2018-2019, Round 12 - 2022",250,9.333333333
+All (2018Ð2024),Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,12.8,64,6.6,4,"1, (2023 Max Verstappen)","20, (2022 Charles Leclerc)",5,"Round 5 - 2018-2019, Round 6 - 2022, Round 7 - 2023, Round 10 - 2024",724,12.8
+All (2018Ð2024),Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,17,85,2.6,3,"1, (2023 Max Verstappen)","4, (2022 Charles Leclerc)",5,"Round 6 - 2018-2019, 2023, Round 7 - 2022, Round 8 - 2024",492,17
+All (2018Ð2024),Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,16.2,81,3.4,3,"1, (2018 Sebastian Vettel, 2023 Max Verstappen)","6, (2022 Charles Leclerc, 2024 Carlos Sainz)",5,"Round 12 - 2023, Round 13 - 2018-2019, Round 14 - 2022, 2024",56,16.2
+All (2018Ð2024),Circuit of the Americas,USA,Austin,30.1328,-97.6411,19,95,2.2,2,"1, (2019 Valtteri Bottas, 2023 Max Verstappen)","4, (2018 Sebastian Vettel)",5,"Round 18 - 2018, 2023, Round 19 - 2019, 2022, 2024",840,18.6
+All (2018Ð2024),Hockenheimring,Germany,Hockenheim,49.3278,8.56583,0,0,16.5,16.5,"15, (2019 Valtteri Bottas)","18, (2018 Sebastian Vettel)",2,Round 11 - 2018-2019,276,0
+All (2018Ð2024),Hungaroring,Hungary,Budapest,47.5789,19.2486,12.8,64,4.6,6,"1, (2023 Max Verstappen)","8, (2019 Valtteri Bottas)",5,"Round 11 - 2023, Round 12 - 2018-2019, Round 13 - 2022, 2024",348,12.8
+All (2018Ð2024),Jeddah Corniche Circuit,Saudi Arabia,Jeddah,21.6319,39.1044,19,38,2,2,"2, (2022 Charles Leclerc, 2023 Max Verstappen)","2, (2022 Charles Leclerc, 2023 Max Verstappen)",2,Round 2 - 2022-2023,682,19
+All (2018Ð2024),Las Vegas Strip Street Circuit,United States,Las Vegas,36.1147,-115.173,20,40,2,2,"1, (2023 Max Verstappen)","3, (2024 Carlos Sainz)",2,"Round 21 - 2023, Round 22 - 2024",840,20
+All (2018Ð2024),Losail International Circuit,Qatar,Al Daayen,25.49,51.4542,17,34,3.5,3.5,"1, (2023 Max Verstappen)","6, (2024 Carlos Sainz)",2,"Round 17 - 2023, Round 23 - 2024",634,17
+All (2018Ð2024),Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,11.8,59,4.4,5,"2, (2022 Charles Leclerc)","7, (2024 Carlos Sainz)",5,"Round 15 - 2018-2019, 2023, Round 17 - 2022, Round 18 - 2024",702,11.8
+All (2018Ð2024),Miami International Autodrome,USA,Miami,25.9581,-80.2389,18,54,2.6666666666666665,2,"1, (2023 Max Verstappen)","5, (2024 Carlos Sainz)",3,"Round 5 - 2022-2023, Round 6 - 2024",840,18.6
+All (2018Ð2024),Red Bull Ring,Austria,Spielberg,47.2197,14.7647,19.2,96,2.2,3,"1, (2022 Charles Leclerc, 2023 Max Verstappen)","3, (2018 Sebastian Vettel, 2019 Valtteri Bottas, 2024 Carlos Sainz)",5,"Round 9 - 2018-2019, 2023, Round 11 - 2022, 2024",40,19.2
+All (2018Ð2024),Shanghai International Circuit,China,Shanghai,31.3389,121.22,10.666666666666666,32,5,5,"2, (2019 Valtteri Bottas)","8, (2018 Sebastian Vettel)",3,"Round 3 - 2018-2019, Round 5 - 2024",156,10.66666667
+All (2018Ð2024),Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,18.4,92,2.6,2,"1, (2018 Sebastian Vettel, 2023 Max Verstappen)","5, (2024 Carlos Sainz)",5,"Round 10 - 2018-2019, 2022-2023, Round 12 - 2024",826,18.4
+All (2018Ð2024),Sochi Autodrom,Russia,Sochi,43.4057,39.9578,16.5,33,2.5,2.5,"2, (2019 Valtteri Bottas)","3, (2018 Sebastian Vettel)",2,Round 16 - 2018-2019,643,16.5
+All (2018Ð2024),Suzuka Circuit,Japan,Suzuka,34.8431,136.541,17.8,89,2.8,3,"1, (2019 Valtteri Bottas, 2023 Max Verstappen)","6, (2018 Sebastian Vettel)",5,"Round 4 - 2024, Round 16 - 2023, Round 17 - 2018-2019, Round 18 - 2022",392,17.8
+All (2018Ð2024),Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,18.4,92,2.2,2,"1, (2023 Max Verstappen)","4, (2019 Valtteri Bottas)",5,"Round 21 - 2018-2019, Round 22 - 2022-2023, Round 24 - 2024",784,18.4
+2018,Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,25,25,1,1,1 (Sebastian Vettel),1 (Sebastian Vettel),1,Round 1,36,25
+2018,Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,18,18,2,2,2 (Sebastian Vettel),2 (Sebastian Vettel),1,Round 19,484,18
+2018,Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,8,8,6,6,6 (Sebastian Vettel),6 (Sebastian Vettel),1,Round 20,76,8
+2018,Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,12,12,4,4,4 (Sebastian Vettel),4 (Sebastian Vettel),1,Round 14,380,12
+2018,Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,25,25,1,1,1 (Sebastian Vettel),1 (Sebastian Vettel),1,Round 2,48,25
+2018,Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,12,12,4,4,4 (Sebastian Vettel),4 (Sebastian Vettel),1,Round 4,31,12
+2018,Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,25,25,1,1,1 (Sebastian Vettel),1 (Sebastian Vettel),1,Round 7,124,25
+2018,Circuit Paul Ricard,France,Le Castellet,43.2506,5.79167,10,10,5,5,5 (Sebastian Vettel),5 (Sebastian Vettel),1,Round 8,250,10
+2018,Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,12,12,4,4,4 (Sebastian Vettel),4 (Sebastian Vettel),1,Round 5,724,12
+2018,Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,18,18,2,2,2 (Sebastian Vettel),2 (Sebastian Vettel),1,Round 6,492,18
+2018,Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,25,25,1,1,1 (Sebastian Vettel),1 (Sebastian Vettel),1,Round 13,56,25
+2018,Circuit of the Americas,USA,Austin,30.1328,-97.6411,12,12,4,4,4 (Sebastian Vettel),4 (Sebastian Vettel),1,Round 18,840,12
+2018,Hockenheimring,Germany,Hockenheim,49.3278,8.56583,0,0,18,18,18 (Sebastian Vettel),18 (Sebastian Vettel),1,Round 11,276,0
+2018,Hungaroring,Hungary,Budapest,47.5789,19.2486,18,18,2,2,2 (Sebastian Vettel),2 (Sebastian Vettel),1,Round 12,348,18
+2018,Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,15,15,3,3,3 (Sebastian Vettel),3 (Sebastian Vettel),1,Round 15,702,15
+2018,Red Bull Ring,Austria,Spielberg,47.2197,14.7647,15,15,3,3,3 (Sebastian Vettel),3 (Sebastian Vettel),1,Round 9,40,15
+2018,Shanghai International Circuit,China,Shanghai,31.3389,121.22,4,4,8,8,8 (Sebastian Vettel),8 (Sebastian Vettel),1,Round 3,156,4
+2018,Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,25,25,1,1,1 (Sebastian Vettel),1 (Sebastian Vettel),1,Round 10,826,25
+2018,Sochi Autodrom,Russia,Sochi,43.4057,39.9578,15,15,3,3,3 (Sebastian Vettel),3 (Sebastian Vettel),1,Round 16,643,15
+2018,Suzuka Circuit,Japan,Suzuka,34.8431,136.541,8,8,6,6,6 (Sebastian Vettel),6 (Sebastian Vettel),1,Round 17,392,8
+2018,Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,18,18,2,2,2 (Sebastian Vettel),2 (Sebastian Vettel),1,Round 21,784,18
+2019,Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,26,26,1,1,1 (Valtteri Bottas),1 (Valtteri Bottas),1,Round 1,36,26
+2019,Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,15,15,3,3,3 (Valtteri Bottas),3 (Valtteri Bottas),1,Round 18,484,15
+2019,Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,0,0,20,20,20 (Valtteri Bottas),20 (Valtteri Bottas),1,Round 20,76,0
+2019,Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 14,380,18
+2019,Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 2,48,18
+2019,Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,25,25,1,1,1 (Valtteri Bottas),1 (Valtteri Bottas),1,Round 4,31,25
+2019,Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,13,13,4,4,4 (Valtteri Bottas),4 (Valtteri Bottas),1,Round 7,124,13
+2019,Circuit Paul Ricard,France,Le Castellet,43.2506,5.79167,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 8,250,18
+2019,Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 5,724,18
+2019,Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,15,15,3,3,3 (Valtteri Bottas),3 (Valtteri Bottas),1,Round 6,492,15
+2019,Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,15,15,3,3,3 (Valtteri Bottas),3 (Valtteri Bottas),1,Round 13,56,15
+2019,Circuit of the Americas,USA,Austin,30.1328,-97.6411,25,25,1,1,1 (Valtteri Bottas),1 (Valtteri Bottas),1,Round 19,840,25
+2019,Hockenheimring,Germany,Hockenheim,49.3278,8.56583,0,0,15,15,15 (Valtteri Bottas),15 (Valtteri Bottas),1,Round 11,276,0
+2019,Hungaroring,Hungary,Budapest,47.5789,19.2486,4,4,8,8,8 (Valtteri Bottas),8 (Valtteri Bottas),1,Round 12,348,4
+2019,Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,10,10,5,5,5 (Valtteri Bottas),5 (Valtteri Bottas),1,Round 15,702,10
+2019,Red Bull Ring,Austria,Spielberg,47.2197,14.7647,15,15,3,3,3 (Valtteri Bottas),3 (Valtteri Bottas),1,Round 9,40,15
+2019,Shanghai International Circuit,China,Shanghai,31.3389,121.22,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 3,156,18
+2019,Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 10,826,18
+2019,Sochi Autodrom,Russia,Sochi,43.4057,39.9578,18,18,2,2,2 (Valtteri Bottas),2 (Valtteri Bottas),1,Round 16,643,18
+2019,Suzuka Circuit,Japan,Suzuka,34.8431,136.541,25,25,1,1,1 (Valtteri Bottas),1 (Valtteri Bottas),1,Round 17,392,25
+2019,Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,12,12,4,4,4 (Valtteri Bottas),4 (Valtteri Bottas),1,Round 21,784,12
+2022,Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,26,26,1,1,1 (Charles Leclerc),1 (Charles Leclerc),1,Round 3,36,26
+2022,Autodromo Enzo e Dino Ferrari,Italy,Imola,44.3439,11.7167,8,8,6,6,6 (Charles Leclerc),6 (Charles Leclerc),1,Round 4,380,13
+2022,Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,8,8,6,6,6 (Charles Leclerc),6 (Charles Leclerc),1,Round 20,484,8
+2022,Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,12,12,4,4,4 (Charles Leclerc),4 (Charles Leclerc),1,Round 21,76,12
+2022,Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,18,18,2,2,2 (Charles Leclerc),2 (Charles Leclerc),1,Round 16,380,13
+2022,Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,26,26,1,1,1 (Charles Leclerc),1 (Charles Leclerc),1,Round 1,48,26
+2022,Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,0,0,19,19,19 (Charles Leclerc),19 (Charles Leclerc),1,Round 8,31,0
+2022,Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,10,10,5,5,5 (Charles Leclerc),5 (Charles Leclerc),1,Round 9,124,10
+2022,Circuit Park Zandvoort,Netherlands,Zandvoort,52.3888,4.54092,15,15,3,3,3 (Charles Leclerc),3 (Charles Leclerc),1,Round 15,528,15
+2022,Circuit Paul Ricard,France,Le Castellet,43.2506,5.79167,0,0,19,19,19 (Charles Leclerc),19 (Charles Leclerc),1,Round 12,250,0
+2022,Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,0,0,20,20,20 (Charles Leclerc),20 (Charles Leclerc),1,Round 6,724,0
+2022,Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,12,12,4,4,4 (Charles Leclerc),4 (Charles Leclerc),1,Round 7,492,12
+2022,Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,8,8,6,6,6 (Charles Leclerc),6 (Charles Leclerc),1,Round 14,56,8
+2022,Circuit of the Americas,USA,Austin,30.1328,-97.6411,15,15,3,3,3 (Charles Leclerc),3 (Charles Leclerc),1,Round 19,840,16.5
+2022,Hungaroring,Hungary,Budapest,47.5789,19.2486,8,8,6,6,6 (Charles Leclerc),6 (Charles Leclerc),1,Round 13,348,8
+2022,Jeddah Corniche Circuit,Saudi Arabia,Jeddah,21.6319,39.1044,19,19,2,2,2 (Charles Leclerc),2 (Charles Leclerc),1,Round 2,682,19
+2022,Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,18,18,2,2,2 (Charles Leclerc),2 (Charles Leclerc),1,Round 17,702,18
+2022,Miami International Autodrome,USA,Miami,25.9581,-80.2389,18,18,2,2,2 (Charles Leclerc),2 (Charles Leclerc),1,Round 5,840,16.5
+2022,Red Bull Ring,Austria,Spielberg,47.2197,14.7647,25,25,1,1,1 (Charles Leclerc),1 (Charles Leclerc),1,Round 11,40,25
+2022,Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,12,12,4,4,4 (Charles Leclerc),4 (Charles Leclerc),1,Round 10,826,12
+2022,Suzuka Circuit,Japan,Suzuka,34.8431,136.541,15,15,3,3,3 (Charles Leclerc),3 (Charles Leclerc),1,Round 18,392,15
+2022,Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,18,18,2,2,2 (Charles Leclerc),2 (Charles Leclerc),1,Round 22,784,18
+2023,Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 3,36,25
+2023,Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 19,484,25
+2023,Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 20,76,25
+2023,Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 14,380,25
+2023,Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 1,48,25
+2023,Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,18,18,2,2,2 (Max Verstappen),2 (Max Verstappen),1,Round 4,31,18
+2023,Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 8,124,25
+2023,Circuit Park Zandvoort,Netherlands,Zandvoort,52.3888,4.54092,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 13,528,25
+2023,Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 7,724,26
+2023,Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 6,492,25
+2023,Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 12,56,25
+2023,Circuit of the Americas,USA,Austin,30.1328,-97.6411,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 18,840,25.5
+2023,Hungaroring,Hungary,Budapest,47.5789,19.2486,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 11,348,26
+2023,Jeddah Corniche Circuit,Saudi Arabia,Jeddah,21.6319,39.1044,19,19,2,2,2 (Max Verstappen),2 (Max Verstappen),1,Round 2,682,19
+2023,Las Vegas Strip Street Circuit,United States,Las Vegas,36.1147,-115.173,25,25,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 21,840,25
+2023,Losail International Circuit,Qatar,Al Daayen,25.49,51.4542,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 17,634,26
+2023,Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,10,10,5,5,5 (Max Verstappen),5 (Max Verstappen),1,Round 15,702,10
+2023,Miami International Autodrome,USA,Miami,25.9581,-80.2389,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 5,840,25.5
+2023,Red Bull Ring,Austria,Spielberg,47.2197,14.7647,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 9,40,26
+2023,Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 10,826,26
+2023,Suzuka Circuit,Japan,Suzuka,34.8431,136.541,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 16,392,26
+2023,Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,26,26,1,1,1 (Max Verstappen),1 (Max Verstappen),1,Round 22,784,26
+2024,Albert Park Grand Prix Circuit,Australia,Melbourne,-37.8497,144.968,25,25,1,1,1 (Carlos Sainz),1 (Carlos Sainz),1,Round 3,36,25
+2024,Autodromo Enzo e Dino Ferrari,Italy,Imola,44.3439,11.7167,10,10,5,5,5 (Carlos Sainz),5 (Carlos Sainz),1,Round 7,380,11
+2024,Autodromo Hermanos Rodriguez,Mexico,Mexico City,19.4042,-99.0907,25,25,1,1,1 (Carlos Sainz),1 (Carlos Sainz),1,Round 20,484,25
+2024,Autodromo Jose Carlos Pace,Brazil,Sao Paulo,-23.7036,-46.6997,0,0,16,16,16 (Carlos Sainz),16 (Carlos Sainz),1,Round 21,76,0
+2024,Autodromo Nazionale di Monza,Italy,Monza,45.6156,9.28111,12,12,4,4,4 (Carlos Sainz),4 (Carlos Sainz),1,Round 16,380,11
+2024,Bahrain International Circuit,Bahrain,Sakhir,26.0325,50.5106,15,15,3,3,3 (Carlos Sainz),3 (Carlos Sainz),1,Round 1,48,15
+2024,Baku City Circuit,Azerbaijan,Baku,40.3725,49.8533,0,0,18,18,18 (Carlos Sainz),18 (Carlos Sainz),1,Round 17,31,0
+2024,Circuit Gilles Villeneuve,Canada,Montreal,45.5,-73.5228,0,0,16,16,16 (Carlos Sainz),16 (Carlos Sainz),1,Round 9,124,0
+2024,Circuit Park Zandvoort,Netherlands,Zandvoort,52.3888,4.54092,10,10,5,5,5 (Carlos Sainz),5 (Carlos Sainz),1,Round 15,528,10
+2024,Circuit de Barcelona-Catalunya,Spain,Montmelo,41.57,2.26111,8,8,6,6,6 (Carlos Sainz),6 (Carlos Sainz),1,Round 10,724,8
+2024,Circuit de Monaco,Monaco,Monte-Carlo,43.7347,7.42056,15,15,3,3,3 (Carlos Sainz),3 (Carlos Sainz),1,Round 8,492,15
+2024,Circuit de Spa-Francorchamps,Belgium,Spa,50.4372,5.97139,8,8,6,6,6 (Carlos Sainz),6 (Carlos Sainz),1,Round 14,56,8
+2024,Circuit of the Americas,USA,Austin,30.1328,-97.6411,18,18,2,2,2 (Carlos Sainz),2 (Carlos Sainz),1,Round 19,840,14
+2024,Hungaroring,Hungary,Budapest,47.5789,19.2486,8,8,6,6,6 (Carlos Sainz),6 (Carlos Sainz),1,Round 13,348,8
+2024,Las Vegas Strip Street Circuit,United States,Las Vegas,36.1147,-115.173,15,15,3,3,3 (Carlos Sainz),3 (Carlos Sainz),1,Round 22,840,15
+2024,Losail International Circuit,Qatar,Al Daayen,25.49,51.4542,8,8,6,6,6 (Carlos Sainz),6 (Carlos Sainz),1,Round 23,634,8
+2024,Marina Bay Street Circuit,Singapore,Marina Bay,1.2914,103.864,6,6,7,7,7 (Carlos Sainz),7 (Carlos Sainz),1,Round 18,702,6
+2024,Miami International Autodrome,USA,Miami,25.9581,-80.2389,10,10,5,5,5 (Carlos Sainz),5 (Carlos Sainz),1,Round 6,840,14
+2024,Red Bull Ring,Austria,Spielberg,47.2197,14.7647,15,15,3,3,3 (Carlos Sainz),3 (Carlos Sainz),1,Round 11,40,15
+2024,Shanghai International Circuit,China,Shanghai,31.3389,121.22,10,10,5,5,5 (Carlos Sainz),5 (Carlos Sainz),1,Round 5,156,10
+2024,Silverstone Circuit,UK,Silverstone,52.0786,-1.01694,11,11,5,5,5 (Carlos Sainz),5 (Carlos Sainz),1,Round 12,826,11
+2024,Suzuka Circuit,Japan,Suzuka,34.8431,136.541,15,15,3,3,3 (Carlos Sainz),3 (Carlos Sainz),1,Round 4,392,15
+2024,Yas Marina Circuit,UAE,Abu Dhabi,24.4672,54.6031,18,18,2,2,2 (Carlos Sainz),2 (Carlos Sainz),1,Round 24,784,18
