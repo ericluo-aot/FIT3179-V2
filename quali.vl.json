@@ -34,7 +34,6 @@
   ],
 
   "layer": [
-    /* diagonal reference: qualifying = finishing, clamped to 1–7 */
     {
       "data": {"values": [{"g": 1, "f": 1}, {"g": 7, "f": 7}]},
       "mark": {"type": "line", "strokeDash": [4, 4], "color": "#9AA0A6"},
@@ -44,7 +43,6 @@
       }
     },
 
-    /* invisible large hit-area for easy hover + tooltips */
     {
       "mark": {"type": "circle", "opacity": 0, "size": 900},
       "params": [
@@ -93,7 +91,7 @@
       }
     },
 
-    /* base faces (dim unless hovered) */
+
     {
       "mark": {"type": "image", "width": 44, "height": 52},
       "encoding": {
@@ -104,7 +102,7 @@
       }
     },
 
-    /* enlarged face on hover */
+
     {
       "transform": [{"filter": {"param": "Hover"}}],
       "mark": {"type": "image", "width": 64, "height": 76},
