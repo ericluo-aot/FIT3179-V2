@@ -3,11 +3,17 @@
     "autosize": {"type": "fit", "contains": "padding"},
     "description": "Interactive world map showing where Australian Grand Prix winners scored points at other circuits. Select overall (2018–2024) or a specific season; re-center by region; show/hide circuits.",
     "title": {
-      "subtitle": "Countries shaded by country average points for the selected season. Dots show circuits sized by number of races.",
-      "subtitleFont": "Inter, Arial, sans-serif",
-      "fontSize": 18,
-      "anchor": "start"
-    },
+  "text": " ",                         // keep a non-empty title
+  "subtitle": "Countries shaded by country average points for the selected season. Dots show circuits sized by number of races.",
+  "font": "Inter, Arial, sans-serif",
+  "subtitleFont": "Inter, Arial, sans-serif",
+  "fontSize": 1,                       // tiny title text
+  "color": "#00000000",                // fully transparent title
+  "subtitleFontSize": 14,
+  "anchor": "start",
+  "offset": 4
+}
+,
     "autosize": { "type": "fit", "contains": "padding" },
     "width": "container",
     "height": 550,
