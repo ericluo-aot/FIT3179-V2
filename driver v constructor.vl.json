@@ -1,0 +1,145 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Australian GP Winners vs Constructor Performance (2018–2024)",
+      "subtitle": "Comparing Australian GP–winning drivers’ and constructors’ final championship standings",
+      "anchor": "start",
+      "fontSize": 18,
+      "font": "Inter, Arial, sans-serif",
+      "subtitleFont": "Inter, Arial, sans-serif"
+    },
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/ausgp_driver_vs_team_standing.csv"
+    },
+  
+    "transform": [
+      {"fold": ["driverStanding", "constructorStanding"], "as": ["Type", "Standing"]},
+      {
+        "calculate": "datum.Type == 'driverStanding' ? 'Driver' : 'Constructor'",
+        "as": "Category"
+      },
+      {
+        "calculate": "datum.Category === 'Driver' ? datum.constructorName : datum.constructorName + ' (Constructor)'",
+        "as": "ColorKey"
+      },
+      {"calculate": "6 - datum.Standing", "as": "Height"},
+      {"calculate": "datum.season + ' - ' + datum.driverName", "as": "SeasonLabel"}
+    ],
+  
+    "layer": [
+      /* Reference line at Champion (1st place) */
+      {
+        "mark": {"type": "rule", "color": "#999", "strokeDash": [4,2]},
+        "encoding": {"y": {"value": 5}}
+      },
+  
+      /* Grouped bars */
+      {
+        "mark": {
+          "type": "bar",
+          "cornerRadiusTopLeft": 5,
+          "cornerRadiusTopRight": 5
+        },
+        "encoding": {
+          "x": {
+            "field": "SeasonLabel",
+            "type": "ordinal",
+            "title": "Season – Driver",
+            "axis": {
+              "labelAngle": -40,
+              "labelFont": "Inter, Arial, sans-serif",
+              "labelFontSize": 12,
+              "titleFont": "Inter, Arial, sans-serif",
+              "titleFontSize": 13,
+              "tickSize": 4
+            }
+          },
+          "y": {
+            "field": "Height",
+            "type": "quantitative",
+            "title": "Championship Standing (1 = Champion)",
+            "scale": {"domain": [0, 6]},
+            "axis": {
+              "values": [1, 2, 3, 4, 5, 6],
+              "labelExpr": "6 - datum.value",
+              "labelFont": "Inter, Arial, sans-serif",
+              "labelFontSize": 12,
+              "titleFont": "Inter, Arial, sans-serif",
+              "titleFontSize": 13,
+              "tickSize": 4
+            }
+          },
+          "xOffset": {"field": "Category", "sort": ["Driver", "Constructor"]},
+          "color": {
+            "field": "ColorKey",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Ferrari", "Mercedes", "Red Bull",
+                "Ferrari (Constructor)", "Mercedes (Constructor)", "Red Bull (Constructor)"
+              ],
+              "range": [
+                "#E10600", "#00E0C0", "#1E41FF",
+                "#A30000", "#33C6B6", "#162FBA"
+              ]
+            },
+            "legend": {
+              "title": "Constructor",
+              "orient": "top",
+              "labelFont": "Inter, Arial, sans-serif",
+              "titleFont": "Inter, Arial, sans-serif",
+              "labelFontSize": 12,
+              "titleFontSize": 13
+            }
+          },
+          "tooltip": [
+            {"field": "season", "title": "Season"},
+            {"field": "Category", "title": "Type"},
+            {"field": "driverName", "title": "Driver"},
+            {"field": "constructorName", "title": "Constructor"},
+            {"field": "Standing", "title": "Final Standing"},
+            {"field": "driver_points", "title": "Driver Points"},
+            {"field": "constructor_points", "title": "Constructor Points"},
+            {"field": "Champion", "title": "Drivers' Champion"},
+            {"field": "Constructors_champion", "title": "Constructors' Champion"}
+          ]
+        }
+      }
+    ],
+  
+    "config": {
+      "background": "white",
+      "view": {"stroke": "transparent", "padding": 10},
+      "axis": {
+        "labelFont": "Inter, Arial, sans-serif",
+        "titleFont": "Inter, Arial, sans-serif",
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "gridColor": "#e6e6e6",
+        "tickSize": 4
+      },
+      "legend": {
+        "labelFont": "Inter, Arial, sans-serif",
+        "titleFont": "Inter, Arial, sans-serif",
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "orient": "top"
+      },
+      "title": {
+        "font": "Inter, Arial, sans-serif",
+        "fontSize": 18,
+        "anchor": "start"
+      },
+      "header": {
+        "labelFont": "Inter, Arial, sans-serif",
+        "titleFont": "Inter, Arial, sans-serif"
+      },
+      "tooltip": {
+        "content": "data",
+        "font": "Inter, Arial, sans-serif",
+        "fontSize": 12
+      }
+    }
+  }
+  
