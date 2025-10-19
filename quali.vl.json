@@ -3,12 +3,16 @@
 
   "title": {
     "text": "Qualifying vs Finishing Efficiency",
-    "subtitle": "Past 5 Australian GP winners (2018-19,2022-24) for that season. Top-left = qualified well and finished well.",
+    "subtitle": "Past 5 Australian GP winners (2018–19, 2022–24) for that season. Top-left = qualified well and finished well.",
     "anchor": "start",
     "font": "Inter, Arial, sans-serif",
     "subtitleFont": "Inter, Arial, sans-serif",
     "fontSize": 18
   },
+
+  "autosize": {"type": "fit", "contains": "padding"},
+  "width": "container",
+  "height": 360,
 
   "data": {
     "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winner_only.csv"
@@ -30,6 +34,7 @@
   ],
 
   "layer": [
+    /* diagonal reference: qualifying = finishing, clamped to 1–7 */
     {
       "data": {"values": [{"g": 1, "f": 1}, {"g": 7, "f": 7}]},
       "mark": {"type": "line", "strokeDash": [4, 4], "color": "#9AA0A6"},
@@ -39,6 +44,7 @@
       }
     },
 
+    /* invisible large hit-area for easy hover + tooltips */
     {
       "mark": {"type": "circle", "opacity": 0, "size": 900},
       "params": [
@@ -48,7 +54,7 @@
         "x": {
           "field": "avgGrid",
           "type": "quantitative",
-          "scale": {"domain": [1, 7]},
+          "scale": {"domain": [1, 7], "nice": false, "clamp": true},
           "axis": {
             "title": "Average grid position (qualifying)",
             "tickMinStep": 1,
@@ -62,7 +68,7 @@
         "y": {
           "field": "avgFinish",
           "type": "quantitative",
-          "scale": {"reverse": true, "domain": [1, 7]},
+          "scale": {"reverse": true, "domain": [1, 7], "nice": false, "clamp": true},
           "axis": {
             "title": "Average finishing position (lower is better)",
             "tickMinStep": 1,
@@ -87,6 +93,7 @@
       }
     },
 
+    /* base faces (dim unless hovered) */
     {
       "mark": {"type": "image", "width": 44, "height": 52},
       "encoding": {
@@ -97,6 +104,7 @@
       }
     },
 
+    /* enlarged face on hover */
     {
       "transform": [{"filter": {"param": "Hover"}}],
       "mark": {"type": "image", "width": 64, "height": 76},
