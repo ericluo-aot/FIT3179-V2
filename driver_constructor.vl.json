@@ -29,13 +29,11 @@
   ],
 
   "layer": [
-    /* Reference line at Champion (Standing = 1 => Height = 5) */
     {
       "mark": {"type": "rule", "color": "#999", "strokeDash": [4, 2]},
       "encoding": {"y": {"value": 5}}
     },
 
-    /* Grouped bars */
     {
       "mark": {
         "type": "bar",
