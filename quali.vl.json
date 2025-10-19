@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Qualifying vs Finishing Efficiency",
+    "subtitle": "Past 5 Australian GP winners (2018-19,2022-24) for that season. Top-left = qualified well and finished well.",
+    "anchor": "start",
+    "font": "Inter, Arial, sans-serif",
+    "subtitleFont": "Inter, Arial, sans-serif",
+    "fontSize": 18
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winner_only.csv"
+  },
+
+  "transform": [
+    {"filter": "datum.season >= 2018"},
+    {
+      "aggregate": [
+        {"op": "mean",  "field": "grid",           "as": "avgGrid"},
+        {"op": "mean",  "field": "positionOrder",  "as": "avgFinish"},
+        {"op": "sum",   "field": "points",         "as": "totalPoints"},
+        {"op": "count",                            "as": "raceCount"},
+        {"op": "max",   "field": "wins",           "as": "wins"},
+        {"op": "max",   "field": "poles",          "as": "poles"}
+      ],
+      "groupby": ["season", "driverName", "constructorName", "driverImage"]
+    }
+  ],
+
+  "layer": [
+    {
+      "data": {"values": [{"g": 1, "f": 1}, {"g": 7, "f": 7}]},
+      "mark": {"type": "line", "strokeDash": [4, 4], "color": "#9AA0A6"},
+      "encoding": {
+        "x": {"field": "g", "type": "quantitative"},
+        "y": {"field": "f", "type": "quantitative", "scale": {"reverse": true}}
+      }
+    },
+
+    {
+      "mark": {"type": "circle", "opacity": 0, "size": 900},
+      "params": [
+        {"name": "Hover", "select": {"type": "point", "on": "pointerover", "clear": "mouseout"}}
+      ],
+      "encoding": {
+        "x": {
+          "field": "avgGrid",
+          "type": "quantitative",
+          "scale": {"domain": [1, 7]},
+          "axis": {
+            "title": "Average grid position (qualifying)",
+            "tickMinStep": 1,
+            "values": [1,2,3,4,5,6,7],
+            "labelFont": "Inter, Arial, sans-serif",
+            "titleFont": "Inter, Arial, sans-serif",
+            "labelFontSize": 12,
+            "titleFontSize": 13
+          }
+        },
+        "y": {
+          "field": "avgFinish",
+          "type": "quantitative",
+          "scale": {"reverse": true, "domain": [1, 7]},
+          "axis": {
+            "title": "Average finishing position (lower is better)",
+            "tickMinStep": 1,
+            "values": [1,2,3,4,5,6,7],
+            "labelFont": "Inter, Arial, sans-serif",
+            "titleFont": "Inter, Arial, sans-serif",
+            "labelFontSize": 12,
+            "titleFontSize": 13
+          }
+        },
+        "tooltip": [
+          {"field": "season", "title": "Season"},
+          {"field": "driverName", "title": "Driver"},
+          {"field": "constructorName", "title": "Constructor"},
+          {"field": "avgGrid", "title": "Avg grid", "format": ".2f"},
+          {"field": "avgFinish", "title": "Avg finish", "format": ".2f"},
+          {"field": "wins", "title": "Wins"},
+          {"field": "poles", "title": "Poles"},
+          {"field": "totalPoints", "title": "Total points"},
+          {"field": "raceCount", "title": "Races counted"}
+        ]
+      }
+    },
+
+    {
+      "mark": {"type": "image", "width": 44, "height": 52},
+      "encoding": {
+        "x": {"field": "avgGrid", "type": "quantitative"},
+        "y": {"field": "avgFinish", "type": "quantitative"},
+        "url": {"field": "driverImage"},
+        "opacity": {"condition": {"param": "Hover", "value": 1}, "value": 0.8}
+      }
+    },
+
+    {
+      "transform": [{"filter": {"param": "Hover"}}],
+      "mark": {"type": "image", "width": 64, "height": 76},
+      "encoding": {
+        "x": {"field": "avgGrid", "type": "quantitative"},
+        "y": {"field": "avgFinish", "type": "quantitative"},
+        "url": {"field": "driverImage"}
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+    "view": {"stroke": "transparent", "padding": 8},
+    "axis": {
+      "grid": true,
+      "gridColor": "#ececec",
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "tickSize": 4
+    },
+    "legend": {
+      "orient": "bottom",
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif"
+    },
+    "title": {
+      "font": "Inter, Arial, sans-serif",
+      "fontSize": 18,
+      "subtitleFont": "Inter, Arial, sans-serif"
+    },
+    "tooltip": {
+      "content": "data",
+      "font": "Inter, Arial, sans-serif",
+      "fontSize": 12
+    }
+  }
+}
