@@ -40,7 +40,6 @@
     "width": "container",
     "height": 360,
     "layer": [
-      /* lines (winner solid, teammate dashed) */
       {
         "mark": {"type": "line", "interpolate": "monotone"},
         "encoding": {
@@ -96,7 +95,6 @@
         }
       },
 
-      /* points with larger AUS GP highlight + easy hover hit area */
       {
         "mark": {"type": "circle", "opacity": 0.85},
         "encoding": {
