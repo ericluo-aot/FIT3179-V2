@@ -1,35 +1,60 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
-    "text": "Australian GP Winners vs Teammate Performance Across the Season",
+    "text": "Australian GP Winners vs Teammate (Season Performance)",
     "anchor": "start",
     "fontSize": 16
   },
+
+  "autosize": {"type": "fit", "contains": "padding"},
+
   "data": {
     "url": "https://raw.githubusercontent.com/ericluo-aot/FIT3179-V2/refs/heads/main/season_points_winners.csv"
   },
+
   "transform": [
     {"filter": "datum.season >= 2018"},
+    {
+      "calculate": "datum.role === 'Winner' ? 'Winner' : 'Teammate'",
+      "as": "Role"
+    },
     {
       "calculate": "datum.role === 'Winner' ? datum.constructorName : datum.constructorName + '_teammate'",
       "as": "lineColorKey"
     }
   ],
+
   "facet": {
     "field": "facetTitle",
     "type": "ordinal",
     "sort": "ascending",
-    "header": {"title": null, "labelFontSize": 12, "labelPadding": 8}
+    "header": {
+      "title": null,
+      "labelFontSize": 12,
+      "labelPadding": 8
+    }
   },
+
   "spec": {
-    "width": 180,
-    "height": 180,
+    "width": "container",
+    "height": 360,
     "layer": [
+      /* lines (winner solid, teammate dashed) */
       {
-        "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
+        "mark": {"type": "line", "interpolate": "monotone"},
         "encoding": {
-          "x": {"field": "round", "type": "quantitative", "title": "Round"},
-          "y": {"field": "cumulative_points", "type": "quantitative", "title": "Cumulative Points"},
+          "x": {
+            "field": "round",
+            "type": "quantitative",
+            "title": "Round",
+            "axis": {"tickMinStep": 1}
+          },
+          "y": {
+            "field": "cumulative_points",
+            "type": "quantitative",
+            "title": "Cumulative points"
+          },
           "color": {
             "field": "lineColorKey",
             "type": "nominal",
@@ -40,49 +65,85 @@
                 "Ferrari", "Ferrari_teammate"
               ],
               "range": [
-                "#00d2be", "#00d2be40",
-                "#1e41ff", "#1e41ff40",
-                "#dc0000", "#dc000040"
+                "#00D2BE", "#00D2BE66",
+                "#1E41FF", "#1E41FF66",
+                "#DC0000", "#DC000066"
               ]
-            }
+            },
+            "legend": null
+          },
+          "strokeDash": {
+            "field": "Role",
+            "type": "nominal",
+            "scale": {"domain": ["Winner", "Teammate"], "range": [[], [6, 4]]}
+          },
+          "strokeWidth": {
+            "field": "Role",
+            "type": "nominal",
+            "scale": {"domain": ["Winner", "Teammate"], "range": [3, 2]}
           },
           "detail": {"field": "driverName"},
           "tooltip": [
-            {"field": "driverName"},
-            {"field": "constructorName"},
-            {"field": "raceName"},
-            {"field": "positionOrder", "title": "Finishing Position"},
-            {"field": "driver_standings", "title": "Driver Standings Position"},
-            {"field": "cumulative_points", "title": "Cumulative Points"}
+            {"field": "season", "title": "Season"},
+            {"field": "Role", "title": "Role"},
+            {"field": "driverName", "title": "Driver"},
+            {"field": "constructorName", "title": "Constructor"},
+            {"field": "raceName", "title": "Race"},
+            {"field": "positionOrder", "title": "Finish"},
+            {"field": "driver_standings", "title": "Standings (driver)"},
+            {"field": "cumulative_points", "title": "Cumulative points"}
           ]
         }
       },
+
+      /* points with larger AUS GP highlight + easy hover hit area */
       {
-        "mark": {"type": "circle"},
+        "mark": {"type": "circle", "opacity": 0.85},
         "encoding": {
           "x": {"field": "round", "type": "quantitative"},
           "y": {"field": "cumulative_points", "type": "quantitative"},
-          "color": {"field": "lineColorKey", "type": "nominal"},
+          "color": {"field": "lineColorKey", "type": "nominal", "legend": null},
           "size": {
-            "condition": {"test": "datum.isAusGP == 1", "value": 80},
-            "value": 40
+            "condition": {"test": "datum.isAusGP == 1", "value": 130},
+            "value": 50
           },
           "tooltip": [
-            {"field": "driverName"},
-            {"field": "constructorName"},
-            {"field": "raceName"},
-            {"field": "positionOrder", "title": "Finishing Position"},
-            {"field": "driver_standings", "title": "Driver Standings Position"},
-            {"field": "cumulative_points", "title": "Cumulative Points"}
+            {"field": "season", "title": "Season"},
+            {"field": "Role", "title": "Role"},
+            {"field": "driverName", "title": "Driver"},
+            {"field": "constructorName", "title": "Constructor"},
+            {"field": "raceName", "title": "Race"},
+            {"field": "positionOrder", "title": "Finish"},
+            {"field": "driver_standings", "title": "Standings (driver)"},
+            {"field": "cumulative_points", "title": "Cumulative points"}
           ]
         }
       }
     ]
   },
+
   "resolve": {"scale": {"y": "shared", "x": "shared"}},
+
   "config": {
     "facet": {"spacing": 18},
     "legend": {"disable": true},
-    "view": {"stroke": null}
+    "view": {"stroke": "transparent", "padding": 6},
+    "axis": {
+      "grid": true,
+      "gridColor": "#ececec",
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    },
+    "title": {
+      "font": "Inter, Arial, sans-serif",
+      "subtitleFont": "Inter, Arial, sans-serif"
+    },
+    "tooltip": {
+      "content": "data",
+      "font": "Inter, Arial, sans-serif",
+      "fontSize": 12
+    }
   }
 }
