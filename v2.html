@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formula 1 Performance Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    body {
+      background: #e8ecf2;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      padding: 40px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.6rem;
+      margin-top: 0;
+      color: #c00000; /* Ferrari red accent */
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      margin-top: 2rem;
+      padding-left: 10px;
+      border-left: 4px solid #c00000;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 10px;
+      margin-bottom: 50px;
+    }
+
+    .chart {
+      margin-top: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    iframe, .vega-embed {
+      border-radius: 8px;
+    }
+
+    @media (max-width: 1000px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 30px 25px;
+      }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Formula 1 Performance Dashboard</h1>
+
+    <section>
+      <h2>Overview</h2>
+      <p>This dashboard explores how Australian Grand Prix winners performed across each Formula 1 season. It connects their race-day success in Melbourne to broader patterns in driver dominance, team competitiveness, and performance efficiency.</p>
+    </section>
+
+    <section>
+      <h2>Performance Against Teammates</h2>
+      <div id="teammatePerformance" class="chart"></div>
+      <p><em>Compares how Australian GP winners performed against their teammates across each season, revealing intra-team performance gaps and consistency trends.</em></p>
+    </section>
+
+    <section>
+      <div class="two-col">
+        <div>
+          <h2>Driver vs Constructor Performance (2018–2024)</h2>
+          <div id="driverConstructorChart" class="chart"></div>
+          <p><em>Shows how Australian GP–winning drivers’ final standings compared with their constructors’ championship positions.</em></p>
+        </div>
+
+        <div>
+          <h2>Qualifying vs Finishing Efficiency</h2>
+          <div id="qualifyingEfficiency" class="chart"></div>
+          <p><em>Visualises how well drivers converted qualifying performance into race-day finishes. Top-left = consistently strong qualifying and race results.</em></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Where Do Australian GP Winners Travel?</h2>
+      <p>The choropleth map below highlights where Australian GP winners have scored points throughout the season. Use the year slider or overall toggle to explore trends by season.</p>
+      <div id="map" class="chart"></div>
+    </section>
+
+    <footer>
+      <p>Created by Eric Luo · Data source: Formula 1 results dataset (ERGAST API)</p>
+    </footer>
+  </div>
+
+  <script>
+    vegaEmbed("#teammatePerformance", "teammate_comparison.vl.json", {actions: false});
+    vegaEmbed("#driverConstructorChart", "driver_constructor.vl.json", {actions: false});
+    vegaEmbed("#qualifyingEfficiency", "quali.vl.json", {actions: false});
+    vegaEmbed("#map", "map.vl.json", {actions: false});
+  </script>
+</body>
+</html>
