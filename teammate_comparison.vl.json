@@ -47,7 +47,6 @@
     ],
 
     "layer": [
-      /* big invisible hit area to make hover/tooltips easy */
       {
         "mark": {"type": "circle", "opacity": 0, "size": 900},
         "encoding": {
@@ -66,7 +65,6 @@
         }
       },
 
-      /* lines with hover highlight */
       {
         "mark": {"type": "line", "interpolate": "monotone"},
         "encoding": {
@@ -115,7 +113,6 @@
         }
       },
 
-      /* visible points (Aus GP larger) with hover focus */
       {
         "mark": {"type": "circle", "opacity": 0.9},
         "encoding": {
