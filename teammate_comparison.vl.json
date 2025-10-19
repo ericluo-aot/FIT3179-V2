@@ -6,7 +6,8 @@
     "subtitle": "Winners are shaded in the brighter team colour, whilst teammates are shaded in a more transparent tone.",
     "fontSize": 0.1,
   "subtitleFontSize": 14,
-  "anchor": "start"
+  "anchor": "start",
+      "offset": 4
   },
 
   "autosize": {"type": "fit", "contains": "padding"},
