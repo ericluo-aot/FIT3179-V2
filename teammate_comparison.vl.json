@@ -29,6 +29,7 @@
     "field": "facetTitle",
     "type": "ordinal",
     "sort": "ascending",
+    "columns": 5,
     "header": {
       "title": null,
       "labelFontSize": 12,
@@ -37,8 +38,8 @@
   },
 
   "spec": {
-    "width": "container",
-    "height": 360,
+    "width": 220,
+    "height": 220,
     "layer": [
       {
         "mark": {"type": "line", "interpolate": "monotone"},
