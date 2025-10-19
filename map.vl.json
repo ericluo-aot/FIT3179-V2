@@ -1,5 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit", "contains": "padding"},
     "description": "Interactive world map showing where Australian Grand Prix winners scored points at other circuits. Select overall (2018–2024) or a specific season; re-center by region; show/hide circuits.",
     "title": {
       "text": "How do Australian GP winners perform across the season?",
