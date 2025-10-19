@@ -135,10 +135,22 @@
   </div>
 
 <script>
-  vegaEmbed("#teammatePerformance", "teammate_comparison.vl.json", {actions: false});
-  vegaEmbed("#driverConstructorChart", "driver_constructor.vl.json", {actions: false});
-  vegaEmbed("#qualifyingEfficiency", "quali.vl.json", {actions: false});
-  vegaEmbed("#map", "map.vl.json", {actions: false});
+  vegaEmbed("#teammatePerformance", "teammate_comparison.vl.json", {
+  actions: false,
+  renderer: "canvas",
+  config: {autosize: {type: "fit", contains: "padding"}});
+  vegaEmbed("#driverConstructorChart", "driver_constructor.vl.json", {
+  actions: false,
+  renderer: "canvas",
+  config: {autosize: {type: "fit", contains: "padding"}});
+  vegaEmbed("#qualifyingEfficiency", "quali.vl.json", {
+  actions: false,
+  renderer: "canvas",
+  config: {autosize: {type: "fit", contains: "padding"}});
+  vegaEmbed("#map", "map.vl.json", {
+  actions: false,
+  renderer: "canvas",
+  config: {autosize: {type: "fit", contains: "padding"}});
 </script>
 </body>
 </html>
