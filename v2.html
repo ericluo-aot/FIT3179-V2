@@ -5,6 +5,12 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<meta name="description" content="Interactive dashboard exploring how Australian Grand Prix winners perform across the season—teammate comparison, driver vs constructor, qualifying vs race efficiency, and global points map." />
+
 
   <style>
     body { background:#e8ecf2; font-family:"Inter", Arial, sans-serif; }
@@ -27,6 +33,27 @@
     iframe, .vega-embed { border-radius:8px; }
 
     footer { text-align:center; font-size:.9rem; color:#555; margin-top:60px; }
+
+    /* subtle card borders so white-on-white charts don't bleed */
+section { border: 1px solid #e9ecf1; }
+
+/* alternate section background for visual rhythm (contrast between visuals) */
+section.alt { background:#fafbff; }
+
+/* give chart containers a faint frame */
+.chart {
+  background:#ffffff;
+  border:1px solid #e9ecf1;
+  border-radius:8px;
+  padding:4px;          /* tiny buffer so tooltips aren’t clipped */
+}
+
+/* avoid any clipping at embed wrapper level */
+.vega-embed, .chart { width:100% !important; overflow:visible; }
+
+/* make canvases feel “crisper” on retina & keep ratio */
+.vega-embed canvas { max-width:100% !important; height:auto !important; }
+
   </style>
 </head>
 
@@ -45,18 +72,18 @@
       <p><em>Compares how Australian GP winners performed against their teammates across each season. In all seasons except for Bottas in 2019 and Sainz in 2024, Australian GP winners have outperformed their teammates across the season. Verstappen's performance in the 2023 season is notable, winning a record 19 races in a season.</em></p>
     </section>
 
-    <section>
+    <section class="alt">
       <div class="two-col">
         <div>
           <h2>Australian GP Winners vs Constructor Performance</h2>
           <div id="driverConstructorChart" class="chart"></div>
-          <p><em>Again, Australian GP–winning drivers’ have matched the respective performance of their team in driver/constructor championships in all years except 2019 and 2024. Whilst Bottas was unable to beat a dominant Hamilton for the championship, Sainz lost out to both his teammate, Verstappen and the two Mclaren drivers despite having the 2nd/3rd fastest car.</em></p>
+          <p><em>Again, Australian GP–winning drivers’ have matched the respective performance of their team in driver/constructor championships in all years except 2019 and 2024. Whilst Bottas was unable to beat a dominant Hamilton for the championship, Sainz lost out to both his teammate, Verstappen and the two McLaren drivers despite having the 2nd/3rd fastest car.</em></p>
         </div>
 
         <div>
           <h2>Qualifying vs Finishing Efficiency</h2>
           <div id="qualifyingEfficiency" class="chart"></div>
-          <p><em>Visualises how well drivers converted qualifying performance into race-day finishes. Top-left = consistently strong qualifying and race results. Vertsappen in 2023 is the clear outlier, greatly outperforming his qualifying results on Sunday.</em></p>
+          <p><em>Visualises how well drivers converted qualifying performance into race-day finishes. Top-left = consistently strong qualifying and race results. Verstappen in 2023 is the clear outlier, greatly outperforming his qualifying results on Sunday.</em></p>
         </div>
       </div>
     </section>
