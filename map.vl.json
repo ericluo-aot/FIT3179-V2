@@ -9,7 +9,7 @@
       "anchor": "start"
     },
     "autosize": { "type": "fit", "contains": "padding" },
-    "width": 900,
+    "width": "container",
     "height": 550,
   
     "params": [
