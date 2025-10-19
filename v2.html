@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Formula 1 Performance Dashboard</title>
+  <title>Formula 1 - Australian GP Winners Performance Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -32,7 +32,7 @@
 
 <body>
   <div class="container">
-    <h1>Formula 1 Performance Dashboard</h1>
+    <h1>Formula 1 - Australian GP Winners Performance Dashboard</h1>
 
     <section>
       <h2>Overview</h2>
@@ -42,33 +42,33 @@
     <section>
       <h2>Performance Against Teammates</h2>
       <div id="teammatePerformance" class="chart"></div>
-      <p><em>Compares how Australian GP winners performed against their teammates across each season, revealing intra-team performance gaps and consistency trends.</em></p>
+      <p><em>Compares how Australian GP winners performed against their teammates across each season. In all seasons except for Bottas in 2019 and Sainz in 2024, Australian GP winners have outperformed their teammates across the season. Verstappen's performance in the 2023 season is notable, winning a record 19 races in a season.</em></p>
     </section>
 
     <section>
       <div class="two-col">
         <div>
-          <h2>Driver vs Constructor Performance (2018–2024)</h2>
+          <h2>Australian GP Winners vs Constructor Performance</h2>
           <div id="driverConstructorChart" class="chart"></div>
-          <p><em>Shows how Australian GP–winning drivers’ final standings compared with their constructors’ championship positions.</em></p>
+          <p><em>Again, Australian GP–winning drivers’ have matched the respective performance of their team in driver/constructor championships in all years except 2019 and 2024. Whilst Bottas was unable to beat a dominant Hamilton for the championship, Sainz lost out to both his teammate, Verstappen and the two Mclaren drivers despite having the 2nd/3rd fastest car.</em></p>
         </div>
 
         <div>
           <h2>Qualifying vs Finishing Efficiency</h2>
           <div id="qualifyingEfficiency" class="chart"></div>
-          <p><em>Visualises how well drivers converted qualifying performance into race-day finishes. Top-left = consistently strong qualifying and race results.</em></p>
+          <p><em>Visualises how well drivers converted qualifying performance into race-day finishes. Top-left = consistently strong qualifying and race results. Vertsappen in 2023 is the clear outlier, greatly outperforming his qualifying results on Sunday.</em></p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Where Do Australian GP Winners Travel?</h2>
+      <h2>How Do Australian GP Winners perform across the season?</h2>
       <p>The choropleth map below highlights where Australian GP winners have scored points throughout the season. Use the year slider or overall toggle to explore trends by season.</p>
       <div id="map" class="chart"></div>
     </section>
 
     <footer>
-      <p>Created by Eric Luo · Data source: Formula 1 results dataset (ERGAST API)</p>
+      <p>Created by Eric Luo · Data source: Formula 1 results dataset (Kaggle)</p>
     </footer>
   </div>
 
