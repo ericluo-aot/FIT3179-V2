@@ -2,11 +2,14 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "title": {
+    "text": " ",
     "subtitle": "Past 5 Australian GP winners (2018–19, 2022–24) for that season. Top-left = qualified well and finished well.",
     "anchor": "start",
     "font": "Inter, Arial, sans-serif",
     "subtitleFont": "Inter, Arial, sans-serif",
-    "fontSize": 18
+    "fontSize": 0.1,
+  "subtitleFontSize": 14,
+  "anchor": "start"
   },
 
   "autosize": {"type": "fit", "contains": "padding"},
