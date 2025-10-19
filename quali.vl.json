@@ -9,7 +9,8 @@
     "subtitleFont": "Inter, Arial, sans-serif",
     "fontSize": 0.1,
   "subtitleFontSize": 14,
-  "anchor": "start"
+  "anchor": "start",
+      "offset": 4
   },
 
   "autosize": {"type": "fit", "contains": "padding"},
