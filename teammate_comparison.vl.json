@@ -15,7 +15,10 @@
 
   "transform": [
     {"filter": "datum.season >= 2018"},
-    {"calculate": "datum.role === 'Winner' ? 'Winner' : 'Teammate'", "as": "Role"},
+    {
+      "calculate": "datum.role === 'Winner' ? 'Winner' : 'Teammate'",
+      "as": "Role"
+    },
     {
       "calculate": "datum.role === 'Winner' ? datum.constructorName : datum.constructorName + '_teammate'",
       "as": "lineColorKey"
@@ -27,44 +30,18 @@
     "type": "ordinal",
     "sort": "ascending",
     "columns": 5,
-    "header": {"title": null, "labelFontSize": 12, "labelPadding": 8}
+    "header": {
+      "title": null,
+      "labelFontSize": 12,
+      "labelPadding": 8
+    }
   },
 
   "spec": {
     "width": 220,
     "height": 220,
 
-    "params": [
-      {
-        "name": "Hover",
-        "select": {
-          "type": "point",
-          "fields": ["driverName", "season"],
-          "on": "pointerover",
-          "clear": "mouseout"
-        }
-      }
-    ],
-
     "layer": [
-      {
-        "mark": {"type": "circle", "opacity": 0, "size": 900},
-        "encoding": {
-          "x": {"field": "round", "type": "quantitative"},
-          "y": {"field": "cumulative_points", "type": "quantitative"},
-          "tooltip": [
-            {"field": "season", "title": "Season"},
-            {"field": "Role", "title": "Role"},
-            {"field": "driverName", "title": "Driver"},
-            {"field": "constructorName", "title": "Constructor"},
-            {"field": "raceName", "title": "Race"},
-            {"field": "positionOrder", "title": "Finish"},
-            {"field": "driver_standings", "title": "Standings (driver)"},
-            {"field": "cumulative_points", "title": "Cumulative points"}
-          ]
-        }
-      },
-
       {
         "mark": {"type": "line", "interpolate": "monotone"},
         "encoding": {
@@ -102,31 +79,20 @@
             "scale": {"domain": ["Winner", "Teammate"], "range": [[], [6, 4]]}
           },
           "strokeWidth": {
-            "condition": {"param": "Hover", "value": 3.5},
-            "value": 2.5
-          },
-          "opacity": {
-            "condition": {"param": "Hover", "value": 1},
-            "value": 0.7
+            "field": "Role",
+            "type": "nominal",
+            "scale": {"domain": ["Winner", "Teammate"], "range": [3, 2]}
           },
           "detail": {"field": "driverName"}
         }
       },
 
+      /* Invisible hover target layer (larger hit area) */
       {
-        "mark": {"type": "circle", "opacity": 0.9},
+        "mark": {"type": "circle", "opacity": 0, "size": 600},
         "encoding": {
           "x": {"field": "round", "type": "quantitative"},
           "y": {"field": "cumulative_points", "type": "quantitative"},
-          "color": {"field": "lineColorKey", "type": "nominal", "legend": null},
-          "size": {
-            "condition": {"test": "datum.isAusGP == 1", "value": 130},
-            "value": 55
-          },
-          "opacity": {
-            "condition": {"param": "Hover", "value": 1},
-            "value": 0.85
-          },
           "tooltip": [
             {"field": "season", "title": "Season"},
             {"field": "Role", "title": "Role"},
@@ -137,6 +103,20 @@
             {"field": "driver_standings", "title": "Standings (driver)"},
             {"field": "cumulative_points", "title": "Cumulative points"}
           ]
+        }
+      },
+
+      /* Visible data points */
+      {
+        "mark": {"type": "circle", "opacity": 0.85},
+        "encoding": {
+          "x": {"field": "round", "type": "quantitative"},
+          "y": {"field": "cumulative_points", "type": "quantitative"},
+          "color": {"field": "lineColorKey", "type": "nominal", "legend": null},
+          "size": {
+            "condition": {"test": "datum.isAusGP == 1", "value": 130},
+            "value": 50
+          }
         }
       }
     ]
