@@ -2,11 +2,14 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "title": {
+    "text": " ",
     "subtitle": "Comparing Australian GP–winning drivers’ and constructors’ final championship standings (2018–2024)",
     "anchor": "start",
     "font": "Inter, Arial, sans-serif",
     "subtitleFont": "Inter, Arial, sans-serif",
-    "fontSize": 18
+    "fontSize": 0.1,
+  "subtitleFontSize": 14,
+  "anchor": "start"
   },
 
   "width": 560,
