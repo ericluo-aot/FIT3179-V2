@@ -2,7 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "title": {
-    "text": "Qualifying vs Finishing Efficiency",
     "subtitle": "Past 5 Australian GP winners (2018–19, 2022–24) for that season. Top-left = qualified well and finished well.",
     "anchor": "start",
     "font": "Inter, Arial, sans-serif",
