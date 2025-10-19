@@ -5,11 +5,13 @@
     "text": "Australian GP Winners vs Constructor Performance (2018–2024)",
     "subtitle": "Comparing Australian GP–winning drivers’ and constructors’ final championship standings",
     "anchor": "start",
-    "fontSize": 18,
     "font": "Inter, Arial, sans-serif",
-    "subtitleFont": "Inter, Arial, sans-serif"
+    "subtitleFont": "Inter, Arial, sans-serif",
+    "fontSize": 18
   },
 
+  "width": 560,
+  "height": 360,
   "autosize": {"type": "fit", "contains": "padding"},
 
   "data": {
@@ -29,17 +31,15 @@
   ],
 
   "layer": [
+    /* Champion reference rule (1st place) */
     {
       "mark": {"type": "rule", "color": "#999", "strokeDash": [4, 2]},
       "encoding": {"y": {"value": 5}}
     },
 
+    /* Grouped bars */
     {
-      "mark": {
-        "type": "bar",
-        "cornerRadiusTopLeft": 5,
-        "cornerRadiusTopRight": 5
-      },
+      "mark": { "type": "bar", "cornerRadiusTopLeft": 5, "cornerRadiusTopRight": 5 },
       "encoding": {
         "x": {
           "field": "SeasonLabel",
@@ -48,13 +48,15 @@
           "sort": {"field": "season_num", "order": "ascending"},
           "axis": {
             "labelAngle": -40,
+            "labelLimit": 150,
+            "labelOverlap": "greedy",
             "labelFont": "Inter, Arial, sans-serif",
             "labelFontSize": 12,
             "titleFont": "Inter, Arial, sans-serif",
             "titleFontSize": 13,
             "tickSize": 4
           },
-          "scale": {"paddingInner": 0.2, "paddingOuter": 0.1}
+          "scale": { "paddingInner": 0.28, "paddingOuter": 0.16 }
         },
         "y": {
           "field": "Height",
@@ -80,10 +82,7 @@
               "Ferrari", "Mercedes", "Red Bull",
               "Ferrari (Constructor)", "Mercedes (Constructor)", "Red Bull (Constructor)"
             ],
-            "range": [
-              "#E10600", "#00E0C0", "#1E41FF",
-              "#A30000", "#33C6B6", "#162FBA"
-            ]
+            "range": ["#E10600", "#00E0C0", "#1E41FF", "#A30000", "#33C6B6", "#162FBA"]
           },
           "legend": {
             "title": "Constructor",
@@ -135,11 +134,6 @@
     "header": {
       "labelFont": "Inter, Arial, sans-serif",
       "titleFont": "Inter, Arial, sans-serif"
-    },
-    "tooltip": {
-      "content": "data",
-      "font": "Inter, Arial, sans-serif",
-      "fontSize": 12
     }
   }
 }
